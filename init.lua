@@ -17,6 +17,9 @@ opt.smartcase = true
 -- True color
 opt.termguicolors = true
 
+-- Line number
+opt.number = true
+
 -- Leader key
 vim.g.mapleader = " "
 
