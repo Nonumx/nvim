@@ -73,11 +73,26 @@ local LuaSnip = {
     end
 }
 
+local nvim_autopairs = {
+    "windwp/nvim-autopairs",
+    config = function()
+        require("nvim-autopairs").setup()
+
+        -- Setup autopairs for cmp
+        local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+        require("cmp").event:on(
+            "confirm_done",
+            cmp_autopairs.on_confirm_done()
+        )
+    end
+}
+
 local cmp = {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
     dependencies = {
         LuaSnip,
+        nvim_autopairs,
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
     },
@@ -164,6 +179,8 @@ local indent_blankline = {
     show_current_context = true,
     show_current_context_start = true,
 }
+
+
 
 local plugins = {
     tokyonight,
