@@ -151,9 +151,18 @@ local plenary = {
     "nvim-lua/plenary.nvim",
     lazy = true,
 }
+
 local nvim_web_devicons = {
     "nvim-tree/nvim-web-devicons",
     lazy = true,
+}
+
+local indent_blankline = {
+    "lukas-reineke/indent-blankline.nvim",
+    show_trailing_blankline_indent = false,
+    show_first_indent_level = false,
+    show_current_context = true,
+    show_current_context_start = true,
 }
 
 local plugins = {
@@ -165,6 +174,7 @@ local plugins = {
     cmp,
     plenary, 
     nvim_web_devicons,
+    indent_blankline,
 }
 
 require("lazy").setup(plugins)
