@@ -180,7 +180,27 @@ local indent_blankline = {
     show_current_context_start = true,
 }
 
-
+local Comment = {
+    "numToStr/Comment.nvim",
+    keys = {
+        { 
+            "<leader>/",
+            function()
+                require("Comment.api").toggle.linewise.current()
+            end,
+            mode = { "i", "n" },
+            desc = "Toggle comment for current line" },
+    },
+    config = function()
+        require("Comment").setup({
+            -- Disable default keybindings
+            mappings = {
+                basic = false,
+                extra = false,
+            }
+        })
+    end
+}
 
 local plugins = {
     tokyonight,
@@ -192,6 +212,7 @@ local plugins = {
     plenary, 
     nvim_web_devicons,
     indent_blankline,
+    Comment,
 }
 
 require("lazy").setup(plugins)
