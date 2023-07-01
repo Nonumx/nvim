@@ -23,6 +23,13 @@ opt.number = true
 -- Leader key
 vim.g.mapleader = " "
 
+vim.api.nvim_create_autocmd("BufEnter", {
+    callback = function()
+        vim.opt.formatoptions:remove({ "r", "o" })
+    end,
+    desc = "Disable new line comment"
+})
+
 -- lazy.nvim bootstrap
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
