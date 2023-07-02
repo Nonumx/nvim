@@ -204,6 +204,11 @@ local Comment = {
     end
 }
 
+local nvim_treesitter = {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+}
+
 local plugins = {
     tokyonight,
     neo_tree,
@@ -215,6 +220,7 @@ local plugins = {
     nvim_web_devicons,
     indent_blankline,
     Comment,
+    nvim_treesitter
 }
 
 require("lazy").setup(plugins)
