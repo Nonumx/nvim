@@ -209,6 +209,13 @@ local nvim_treesitter = {
     build = ":TSUpdate",
 }
 
+local nvim_notify = {
+    "rcarriga/nvim-notify",
+    config = function()
+        vim.notify = require("notify")
+    end
+}
+
 local plugins = {
     tokyonight,
     neo_tree,
@@ -220,7 +227,8 @@ local plugins = {
     nvim_web_devicons,
     indent_blankline,
     Comment,
-    nvim_treesitter
+    nvim_treesitter,
+    nvim_notify
 }
 
 require("lazy").setup(plugins)
