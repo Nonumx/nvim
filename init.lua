@@ -21,7 +21,7 @@ opt.termguicolors = true
 opt.number = true
 
 -- Leader key
-vim.g.mapleader = " "
+vim.g.mapleader = ","
 
 vim.api.nvim_create_autocmd("BufEnter", {
     callback = function()
@@ -95,6 +95,7 @@ local cmp = {
         nvim_autopairs,
         "hrsh7th/cmp-nvim-lsp",
         "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-path",
     },
     config = function()
         local cmp = require("cmp")
@@ -127,6 +128,7 @@ local cmp = {
                 { name = "nvim_lsp" },
                 { name = "luasnip" },
                 { name = "buffer" },
+                { name = "path" },
             }),
         })
     end
