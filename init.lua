@@ -191,7 +191,14 @@ local Comment = {
                 require("Comment.api").toggle.linewise.current()
             end,
             mode = { "i", "n" },
-            desc = "Toggle comment for current line" },
+            desc = "Toggle comment for current line"
+        },
+        {
+            "<leader>/",
+            "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+            mode = "v",
+            desc = "Toogle comment on visual mode"
+        }
     },
     config = function()
         require("Comment").setup({
@@ -207,6 +214,13 @@ local Comment = {
 local nvim_treesitter = {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
+    config = function()
+        require("nvim-treesitter.configs").setup({
+            highlight = {
+                enable = true
+            }
+        })
+    end
 }
 
 local nvim_notify = {
