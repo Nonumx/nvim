@@ -247,3 +247,43 @@ local plugins = {
 
 require("lazy").setup(plugins)
 
+local M = {}
+
+-- Reload CMake cache
+M.reload_cmake = function()
+    vim.g.cmake_reload = false
+    vim.notify("Configuring project...", "info", {
+        title = "CMake: Configure"
+    })
+    local Job = require("plenary.job")
+    Job:new({
+        command = "cmake",
+        args = { "-DCMAKE_EXPORT_COMPILE_COMMANDS=ON", "-Bbuild" },
+        on_exit = function(j, return_val)
+            if return_val ~= 0 then
+                vim.notify(j:stderr_result(), "error", {
+                    title = "CMake: Error"
+                })
+            else
+                vim.notify(j:result(), "info", {
+                    title = "CMake: Generating done"
+                })
+            end
+        end,
+    }):start()
+end
+
+-- Editor will configure CMake project when first open a 
+-- *.h file or *.cpp file.
+-- TODO: Editor will also reload CMake cache when CMakeLists.txt is modified.
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    pattern = { "*.h", "*.cpp" },
+    callback = function()
+        if not vim.loop.fs_stat("CMakeLists.txt") then
+            return
+        end
+        if vim.g.cmake_reload == nil or vim.g.cmake_reload == true then
+            M.reload_cmake()
+        end
+    end
+})
