@@ -274,16 +274,27 @@ M.reload_cmake = function()
 end
 
 -- Editor will configure CMake project when first open a 
--- *.h file or *.cpp file.
--- TODO: Editor will also reload CMake cache when CMakeLists.txt is modified.
+-- *.h file or *.cpp file
 vim.api.nvim_create_autocmd("BufWinEnter", {
     pattern = { "*.h", "*.cpp" },
     callback = function()
         if not vim.loop.fs_stat("CMakeLists.txt") then
             return
         end
-        if vim.g.cmake_reload == nil or vim.g.cmake_reload == true then
+        if vim.g.cmake_reload == nil then
             M.reload_cmake()
         end
+    end
+})
+
+-- Editor will also reload CMake cache when CMakeLists.txt is modified
+vim.api.nvim_create_autocmd("BufWritePost", {
+    pattern = "CMakeLists.txt",
+    callback = function()
+        -- Edit CMakeLists.txt from somewhere not contains it
+        if not vim.loop.fs_stat("CMakeLists.txt") then
+            return 
+        end
+        M.reload_cmake()
     end
 })
