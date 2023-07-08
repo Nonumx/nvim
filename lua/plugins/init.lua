@@ -23,6 +23,9 @@ return {
       "williamboman/mason.nvim",
       "williamboman/mason-lspconfig.nvim",
     },
+    config = function()
+      require("lspconfig").cmake.setup({})
+    end,
   },
   {
     "williamboman/mason.nvim",
@@ -40,9 +43,6 @@ return {
         },
       },
     },
-    config = function(_, opts)
-      require("mason").setup(opts)
-    end,
   },
   {
     "williamboman/mason-lspconfig.nvim",
@@ -138,6 +138,7 @@ return {
       vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
       local cmp = require("cmp")
       local defaults = require("cmp.config.default")()
+      table.insert(defaults.sorting.comparators, 1, require("clangd_extensions.cmp_scores"))
       return {
         completion = {
           completeopt = "menu,menuone,noinsert",
@@ -190,6 +191,46 @@ return {
     event = "VeryLazy",
     config = function()
       require("Comment").setup()
+    end,
+  },
+  {
+    "Civitasv/cmake-tools.nvim",
+    opts = {
+      cmake_build_directory = "build",
+      cmake_soft_link_compile_commands = false,
+    },
+  },
+  {
+    "p00f/clangd_extensions.nvim",
+    opts = {
+      extensions = {
+        inlay_hints = {
+          inline = false,
+        },
+        ast = {
+          --These require codicons (https://github.com/microsoft/vscode-codicons)
+          role_icons = {
+            type = "",
+            declaration = "",
+            expression = "",
+            specifier = "",
+            statement = "",
+            ["template argument"] = "",
+          },
+          kind_icons = {
+            Compound = "",
+            Recovery = "",
+            TranslationUnit = "",
+            PackExpansion = "",
+            TemplateTypeParm = "",
+            TemplateTemplateParm = "",
+            TemplateParamObject = "",
+          },
+        },
+      },
+    },
+    config = function(_, opts)
+      require("clangd_extensions").setup(opts)
     end,
   },
 }
