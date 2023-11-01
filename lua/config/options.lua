@@ -1,6 +1,3 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
 local opt = vim.opt
 
 opt.autowrite = true -- Enable auto write
@@ -44,10 +41,4 @@ opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false -- Disable line wrap
 
-if vim.fn.has("nvim-0.9.0") == 1 then
-  opt.splitkeep = "screen"
-  opt.shortmess:append({ C = true })
-end
-
--- Fix markdown indentation settings
-vim.g.markdown_recommended_style = 0
+vim.cmd[[colorscheme catppuccin-latte]]

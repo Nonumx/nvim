@@ -1,24 +1,25 @@
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system({
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable",
-    lazypath,
-  })
+  vim.fn.system({ "git", "clone", "--filter=blob:none", "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath, })
 end
 vim.opt.rtp:prepend(lazypath)
 
-require("config")
+-- 在 lazy 初始化前设置 leader 键
+vim.g.mapleader = " "
 
-local plugins = require("plugins")
-require("lazy").setup(plugins, {
+require("lazy").setup({
+  spec = {
+    { import = "plugin" },
+  },
+  checker = { enabled = true }, -- 自动检测插件更新
   performance = {
     rtp = {
+      -- 禁止 vim 内置插件
       disabled_plugins = {
         "gzip",
+        -- "matchit",
+        -- "matchparen",
+        -- "netrwPlugin",
         "tarPlugin",
         "tohtml",
         "tutor",
@@ -27,3 +28,5 @@ require("lazy").setup(plugins, {
     },
   },
 })
+
+require("config")
