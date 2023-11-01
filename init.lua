@@ -4,12 +4,7 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- 在 lazy 初始化前设置 leader 键
-vim.g.mapleader = " "
--- 配置 LazyFile 事件别名用于部分插件启动
-local Event = require("lazy.core.handler.event")
-Event.mappings.LazyFile = { id = "LazyFile", event = { "BufReadPost", "BufNewFile", "BufWritePre" } }
-Event.mappings["User LazyFile"] = Event.mappings.LazyFile
+require("config")
 
 require("lazy").setup({
   spec = {
@@ -33,4 +28,4 @@ require("lazy").setup({
   },
 })
 
-require("config")
+vim.cmd[[colorscheme catppuccin-latte]]

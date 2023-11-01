@@ -1,5 +1,12 @@
 local opt = vim.opt
 
+-- 在 lazy 初始化前设置 leader 键
+vim.g.mapleader = " "
+-- 配置 LazyFile 事件别名用于部分插件启动
+local Event = require("lazy.core.handler.event")
+Event.mappings.LazyFile = { id = "LazyFile", event = { "BufReadPost", "BufNewFile", "BufWritePre" } }
+Event.mappings["User LazyFile"] = Event.mappings.LazyFile
+
 opt.autowrite = true -- Enable auto write
 opt.clipboard = "unnamedplus" -- Sync with system clipboard
 opt.completeopt = "menu,menuone,noselect"
@@ -40,5 +47,3 @@ opt.updatetime = 200 -- Save swap file and trigger CursorHold
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false -- Disable line wrap
-
-vim.cmd[[colorscheme catppuccin-latte]]
