@@ -68,6 +68,8 @@ return {
 
             vim.o.laststatus = vim.g.lualine_laststatus
 
+            local lualine_util = require("util.lualine")
+
             require("lualine").setup({
                 options = {
                     theme = "auto",
@@ -75,7 +77,9 @@ return {
                     disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
                 },
                 sections = {
-                    lualine_a = { "mode" },
+                    lualine_a = { 
+                        { lualine_util.get_mode }
+                    },
                     lualine_b = { "branch" },
                     lualine_c = { "filename" },
                     lualine_x = { "encoding" },

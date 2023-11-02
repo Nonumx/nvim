@@ -27,5 +27,3 @@ require("lazy").setup({
     },
   },
 })
-
-vim.cmd[[colorscheme catppuccin-latte]]
