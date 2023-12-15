@@ -5,5 +5,5 @@ return {
   -- 括号匹配
   { "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
   -- 注释
-  { "numToStr/Comment.nvim", opts = { }, lazy = false }
+  { "numToStr/Comment.nvim", opts = {}, lazy = false }
 }
