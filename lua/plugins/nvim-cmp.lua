@@ -35,13 +35,16 @@ return {
           end
         end, {"i", "s", "c"})
       }),
-      sources = cmp.config.sources({
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-        { name = "path" },
-      }, {
-        { name = "buffer" },
-      }),
+      sources = cmp.config.sources(
+        {
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "path" },
+        },
+        {
+          { name = "buffer" },
+        }
+      ),
       experimental = {
         ghost_text = {
           hl_group = "CmpGhostText",
