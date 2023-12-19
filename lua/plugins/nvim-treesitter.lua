@@ -103,14 +103,6 @@ return {
     end,
   },
 
-  -- 显示当前区域的上下文
-  {
-    "nvim-treesitter/nvim-treesitter-context",
-    event = "LazyFile",
-    enabled = true,
-    opts = { mode = "cursor", max_lines = 3 },
-  },
-
   -- 前端中括号自动补全
   {
     "windwp/nvim-ts-autotag",
