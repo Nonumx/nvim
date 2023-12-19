@@ -77,7 +77,7 @@ return {
           { get_mode }
         },
         lualine_b = { "branch" },
-        lualine_c = { "filename" },
+        lualine_c = { "filename", "diagnostics" },
         lualine_x = { "encoding" },
         lualine_y = {
           { "filetype", icon_only = true }
