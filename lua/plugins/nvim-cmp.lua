@@ -1,3 +1,45 @@
+local kind_icons = {
+  Array         = " ",
+  Boolean       = "󰨙 ",
+  Class         = " ",
+  Codeium       = "󰘦 ",
+  Color         = " ",
+  Control       = " ",
+  Collapsed     = " ",
+  Constant      = "󰏿 ",
+  Constructor   = " ",
+  Copilot       = " ",
+  Enum          = " ",
+  EnumMember    = " ",
+  Event         = " ",
+  Field         = " ",
+  File          = " ",
+  Folder        = " ",
+  Function      = "󰊕 ",
+  Interface     = " ",
+  Key           = " ",
+  Keyword       = " ",
+  Method        = "󰊕 ",
+  Module        = " ",
+  Namespace     = "󰦮 ",
+  Null          = " ",
+  Number        = "󰎠 ",
+  Object        = " ",
+  Operator      = " ",
+  Package       = " ",
+  Property      = " ",
+  Reference     = " ",
+  Snippet       = " ",
+  String        = " ",
+  Struct        = "󰆼 ",
+  TabNine       = "󰏚 ",
+  Text          = " ",
+  TypeParameter = " ",
+  Unit          = " ",
+  Value         = " ",
+  Variable      = "󰀫 ",
+}
+
 return {
   "hrsh7th/nvim-cmp",
   version = false, -- release版本太老
@@ -51,6 +93,14 @@ return {
         },
       },
       sorting = defaults.sorting,
+      formatting = {
+        format = function(_, item)
+          if kind_icons[item.kind] then
+            item.kind = kind_icons[item.kind] .. item.kind
+          end
+          return item
+        end
+      }
     }
   end,
   config = function(_, opts)
