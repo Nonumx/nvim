@@ -13,6 +13,12 @@ return {
     },
     {
         "williamboman/mason-lspconfig.nvim",
-        opts = {},
+        config = function()
+            local mlc = require("mason-lspconfig")
+            mlc.setup()
+            mlc.setup_handlers = function(server_name)
+                require("lspconfig")[server_name].setup({})
+            end
+        end
     }
 }
