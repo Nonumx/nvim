@@ -6,4 +6,8 @@ return {
     -- 通知窗口
     { "rcarriga/nvim-notify", lazy = true, },
     { "neovim/nvim-lspconfig", lazy = true, },
+    {
+      "nvim-treesitter/nvim-treesitter",
+      opts = {},
+    },
   }
