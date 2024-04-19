@@ -39,7 +39,6 @@ return {
                         end
                     end, {"i","s","c",}
                 ),
-                ["<ESC>"] = cmp.mapping.abort(),
                 ["<CR>"] = cmp.mapping.confirm({ select = true }),
             }),
             sources = cmp.config.sources(
