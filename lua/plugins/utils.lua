@@ -1,13 +1,15 @@
--- 公共插件库
 return {
-    { "nvim-tree/nvim-web-devicons", lazy = true },
-    { "nvim-lua/plenary.nvim", lazy = true },
-    { "MunifTanjim/nui.nvim", lazy = true },
-    -- 通知窗口
-    { "rcarriga/nvim-notify", lazy = true, },
-    { "neovim/nvim-lspconfig", lazy = true, },
-    {
-      "nvim-treesitter/nvim-treesitter",
-      opts = {},
+  -- 会话管理
+  {
+    "folke/persistence.nvim",
+    event = "BufReadPre",
+    opts = {},
+    -- stylua: ignore
+    keys = {
+      { "<leader>qs", function() require("persistence").load() end, desc = "恢复会话" },
+      { "<leader>qS", function() require("persistence").select() end, desc = "选择会话" },
+      { "<leader>ql", function() require("persistence").load({ last = true }) end, desc = "恢复上一次会话" },
+      { "<leader>qd", function() require("persistence").stop() end, desc = "不保存这一次会话" },
     },
-  }
+  },
+}

@@ -1,2 +1,1 @@
-require("core")
-require("lazy_entry")
+require("bootstrap")
