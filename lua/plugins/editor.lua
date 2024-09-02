@@ -14,6 +14,7 @@ return {
   -- 资源管理器
   {
     "stevearc/oil.nvim",
+    lazy = false,
     version = "~2.12.1",
     dependencies = {
       "nvim-tree/nvim-web-devicons",
