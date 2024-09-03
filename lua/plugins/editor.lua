@@ -14,9 +14,6 @@ return {
     "stevearc/oil.nvim",
     version = "~2.12.1",
     opts = {},
-    keys = {
-      { "-", "<cmd>Oil<cr>", desc = "打开Oil" },
-    }
   },
   -- 模糊搜索
   {
