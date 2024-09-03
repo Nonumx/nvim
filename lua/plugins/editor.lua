@@ -7,21 +7,13 @@ return {
       -- or leave it empty to use the default settings
       -- refer to the configuration section below
     },
-    keys = {
-
-    },
+    keys = {},
   },
   -- 资源管理器
   {
     "stevearc/oil.nvim",
-    lazy = false,
     version = "~2.12.1",
-    dependencies = {
-      "nvim-tree/nvim-web-devicons",
-    },
-    opts = {
-
-    },
+    opts = {},
     keys = {
       { "-", "<cmd>Oil<cr>", desc = "打开Oil" },
     }
@@ -30,9 +22,6 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     version = "~0.1.8",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-    },
     keys = {
       { "<leader>ff", function() require("telescope.builtin").find_files() end, desc = "文件搜索" },
       { "<leader>fg", function() require("telescope.builtin").live_grep() end, desc = "文本搜索" },
@@ -40,12 +29,33 @@ return {
       { "<leader>fh", function() require("telescope.builtin").help_tags() end, desc = "tags搜索" },
     },
   },
-  -- 编辑区高亮,
+  -- 缩进高亮,
   {
     "shellRaining/hlchunk.nvim",
     event = { "BufReadPre", "BufNewFile" },
     opts = {
-
+      chunk = {
+        enable = true,
+      },
     },
+  },
+  -- 语法高亮
+  {
+    "nvim-treesitter/nvim-treesitter",
+    version = false,
+    build = ":TSUpdate",
+    config = function()
+      require("nvim-treesitter.configs").setup({
+        highlight = { enable = true },
+        indent = { enable = true },
+        ensure_installed = {
+          "c",
+          "cpp",
+          "lua",
+          "luadoc",
+          "luap",
+        },
+      })
+    end,
   },
 }

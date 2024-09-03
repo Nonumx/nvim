@@ -12,4 +12,8 @@ return {
       { "<leader>qd", function() require("persistence").stop() end, desc = "不保存这一次会话" },
     },
   },
+  -- 图标包
+  "nvim-tree/nvim-web-devicons",
+  -- 通用库
+  "nvim-lua/plenary.nvim",
 }

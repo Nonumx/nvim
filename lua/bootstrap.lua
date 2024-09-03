@@ -7,6 +7,7 @@ opt.cursorline = true -- 高亮本行
 opt.expandtab = true -- 使用空格替代TAB键
 opt.shiftwidth = 2 -- TAB键缩进长度
 opt.tabstop = 2 -- 1TAB = 2空格
+opt.ignorecase = true -- 搜索时忽略大小写
 opt.smartcase = true -- 搜索时智能判断大小写
 opt.smartindent = true -- 智能缩进
 opt.termguicolors = true -- 真彩显示
@@ -38,8 +39,8 @@ require("lazy").setup({
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
   install = { colorscheme = { "habamax" } },
-  -- automatically check for plugin updates
-  checker = { enabled = true },
+  -- [Disabled] automatically check for plugin updates
+  checker = { enabled = false },
   performance = {
     rtp = {
       -- disable some rtp plugins
