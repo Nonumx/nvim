@@ -24,4 +24,19 @@ return {
       },
     },
   },
+  -- LSP Utils
+  {
+    "nvimdev/lspsaga.nvim",
+    event = "LspAttach",
+    opts = {},
+  },
+  -- 格式化文本
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        cpp = { "clang-format" },
+      },
+    },
+  },
 }
