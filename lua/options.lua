@@ -15,4 +15,5 @@ opt.termguicolors = true -- 真彩显示
 opt.mouse = "a" -- 开启鼠标移动
 opt.signcolumn = "yes" -- 用于LSP显示`code_action`等操作
 opt.formatexpr = "v:lua.require'conform'.format.formatexpr()" -- 使用 `conform.nvim` 进行格式化
-opt.formatoptions = "jqlnt" -- tcqj
+opt.formatoptions = "jcroqlnt" -- tcqj
+
