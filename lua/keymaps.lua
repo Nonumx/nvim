@@ -4,3 +4,4 @@ vim.keymap.set("n", "<leader>bf", function() require("conform").format() end, { 
 
 -- Lspsaga 快捷键
 vim.keymap.set("n", "gd", "<cmd>Lspsaga goto_definition<cr>", { desc = "Lspsaga - 转到定义" })
+vim.keymap.set("n", "tt", "<cmd>Lspsaga term_toggle pwsh.exe<cr>", { desc = "Lspsaga - 打开终端" })
