@@ -48,6 +48,7 @@ return {
         ensure_installed = {
           "c",
           "cpp",
+          "cmake",
           "lua",
           "luadoc",
           "luap",

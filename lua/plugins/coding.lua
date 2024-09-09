@@ -82,8 +82,7 @@ return {
               else
                 fallback()
               end
-            end,
-            {"i","c","s"}
+            end
           ),
           ["<cr>"] = cmp.mapping({
             i = function(fallback)
@@ -93,15 +92,14 @@ return {
                 fallback()
               end
             end,
-            s = cmp.mapping.confirm({ select = true }),
-            c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
           }),
-          ["<esc>"] = cmp.mapping.abort(),
         },
-        sources = cmp.config.sources({
-          { name = "nvim_lsp" },
-        }),
-        completion = { completeopt = 'menu,menuone,noinsert' },
+        sources = cmp.config.sources(
+          {
+            { name = "nvim_lsp" },
+          }
+        ),
+        completion = { completeopt = "menu,menuone,noinsert" },
         formatting = {
           format = function(entry, vim_item)
             vim_item.abbr = strings.truncate(vim_item.abbr, 40)
