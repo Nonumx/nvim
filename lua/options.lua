@@ -12,4 +12,3 @@ opt.smartcase = true -- 搜索时智能判断大小写
 opt.smartindent = true -- 智能缩进
 opt.termguicolors = true -- 真彩显示
 opt.mouse = "a" -- 开启鼠标移动
-opt.formatoptions = "jqlnt"
