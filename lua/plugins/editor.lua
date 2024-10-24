@@ -13,7 +13,10 @@ return {
   {
     "stevearc/oil.nvim",
     version = "~2.12.2",
-    opts = {},
+    opts = function()
+      vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "打开资源管理器" })
+      return {}
+    end,
   },
   -- Treesitter
   {
@@ -26,7 +29,7 @@ return {
           "c",
           "lua",
           "query",
-          "markdown", 
+          "markdown",
           "markdown_inline",
           "cpp",
           "python",
