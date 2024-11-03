@@ -13,3 +13,7 @@ opt.smartindent = true -- 智能缩进
 opt.termguicolors = true -- 真彩显示
 opt.mouse = "a" -- 开启鼠标移动
 opt.formatexpr = "v:lua.require'conform'.formatexpr()" -- conform代码格式化
+
+if vim.g.neovide then
+  opt.guifont="CaskaydiaCove Nerd Font:h12"
+end
