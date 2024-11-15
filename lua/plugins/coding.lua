@@ -19,6 +19,8 @@ return {
 		event = { "InsertEnter", "LspAttach" },
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
 		},
 		opts = function()
 			local cmp = require("cmp")
@@ -64,6 +66,9 @@ return {
 				},
 				sources = cmp.config.sources({
 					{ name = "nvim_lsp" },
+					{ name = "path" },
+				}, {
+					{ name = "buffer" },
 				}),
 				completion = { completeopt = "menu,menuone,noinsert" },
 				formatting = {
@@ -77,5 +82,10 @@ return {
 				},
 			}
 		end,
+	},
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		opts = {},
 	},
 }
