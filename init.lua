@@ -586,17 +586,24 @@ require("lazy").setup({
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
+      local mason_lspconfig_handlers = {
+        function(server_name)
+          local server = opts.servers[server_name] or {}
+          -- This handles overriding only values explicitly passed
+          -- by the server configuration above. Useful when disabling
+          -- certain features of an LSP (for example, turning off formatting for ts_ls)
+          server.capabilities = vim.tbl_deep_extend("force", {}, opts.capabilities, server.capabilities or {})
+          require("lspconfig")[server_name].setup(server)
+        end,
+      }
+      if opts.handlers then
+        for _, handler in pairs(opts.handlers) do
+          vim.list_extend(mason_lspconfig_handlers, { handler })
+        end
+      end
+
       require("mason-lspconfig").setup({
-        handlers = {
-          function(server_name)
-            local server = opts.servers[server_name] or {}
-            -- This handles overriding only values explicitly passed
-            -- by the server configuration above. Useful when disabling
-            -- certain features of an LSP (for example, turning off formatting for ts_ls)
-            server.capabilities = vim.tbl_deep_extend("force", {}, opts.capabilities, server.capabilities or {})
-            require("lspconfig")[server_name].setup(server)
-          end,
-        },
+        handlers = mason_lspconfig_handlers,
       })
     end,
   },
@@ -882,6 +889,7 @@ require("lazy").setup({
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
   require("custom.lang.clangd"),
+  require("custom.lang.vue"),
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
