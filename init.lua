@@ -502,6 +502,12 @@ require("lazy").setup({
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
             end, "[T]oggle Inlay [H]ints")
           end
+
+          if client and client.config["keys"] then
+            for _, value in ipairs(client.config["keys"]) do
+              map(value[1], value[2], value.desc)
+            end
+          end
         end,
       })
 
