@@ -5,25 +5,26 @@ return {
       servers = {
         eslint_d = {},
         prettierd = {},
-        volar = {
+        volar = {},
+        ts_ls = {
           init_options = {
-            vue = {
-              hybridMode = true,
+            plugins = {
+              {
+                name = "@vue/typescript-plugin",
+                location = vim.fn.stdpath("data")
+                  .. "/mason/packages/vue-language-server/node_modules/@vue/language-server",
+                languages = { "vue" },
+                configNamespace = "typescript",
+                enableForWorkspaceTypeScriptVersions = true,
+              },
             },
           },
+          filetypes = {
+            "javascript",
+            "typescript",
+            "vue",
+          },
         },
-        vtsls = {},
-      },
-      handlers = {
-        vtsls = function()
-          vim.print("Hello")
-          local vv = require("lspconfig").vtsls
-          local file = io.open("vtsls.txt", "w")
-          if file then
-            file:write(vim.inspect(vv))
-          end
-          vv.setup()
-        end,
       },
     },
   },

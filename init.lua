@@ -586,7 +586,7 @@ require("lazy").setup({
       })
       require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
-      local mason_lspconfig_handlers = {
+      require("mason-lspconfig").setup_handlers({
         function(server_name)
           local server = opts.servers[server_name] or {}
           -- This handles overriding only values explicitly passed
@@ -595,15 +595,6 @@ require("lazy").setup({
           server.capabilities = vim.tbl_deep_extend("force", {}, opts.capabilities, server.capabilities or {})
           require("lspconfig")[server_name].setup(server)
         end,
-      }
-      if opts.handlers then
-        for _, handler in pairs(opts.handlers) do
-          vim.list_extend(mason_lspconfig_handlers, { handler })
-        end
-      end
-
-      require("mason-lspconfig").setup({
-        handlers = mason_lspconfig_handlers,
       })
     end,
   },
