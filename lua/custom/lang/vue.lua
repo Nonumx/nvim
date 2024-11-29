@@ -3,7 +3,7 @@ return {
     "neovim/nvim-lspconfig",
     opts = {
       servers = {
-        eslint_d = {},
+        ["eslint-lsp"] = {},
         prettierd = {},
         volar = {},
         ts_ls = {
@@ -32,7 +32,9 @@ return {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
-        javascript = { "prettierd", "eslint_d" },
+        javascript = { "eslint-lsp", "prettierd" },
+        typescript = { "eslint-lsp", "prettierd" },
+        vue = { "eslint-lsp", "prettierd" },
       },
     },
   },
