@@ -8,7 +8,7 @@ vim.g.maplocalleader = " "
 vim.g.have_nerd_font = false
 
 -- [[ Setting options ]]
--- See `:help vim.opt`
+-- See `:help _textvim.opt`
 -- NOTE: You can change these options as you wish!
 --  For more options, you can see `:help option-list`
 
@@ -73,6 +73,9 @@ vim.opt.scrolloff = 10
 
 -- Use spaces instead of tabs
 vim.opt.expandtab = true
+
+-- 限制补全菜单一页的项目数
+vim.opt.pumheight = 10
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -677,6 +680,8 @@ require("lazy").setup({
       --  into multiple repos for maintenance purposes.
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-path",
+      -- 增加补全菜单的图标
+      "onsails/lspkind.nvim",
     },
     opts = function()
       -- See `:help cmp`
@@ -758,6 +763,25 @@ require("lazy").setup({
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "path" },
+        },
+        window = {
+          completion = {
+            winhighlight = "Normal:Pmenu,FloatBorder:Pmenu,Search:None",
+            col_offset = -3,
+            side_padding = 0,
+          },
+        },
+        formatting = {
+          format = function(entry, vim_item)
+            local max_width = 40
+            local kind = require("lspkind").cmp_format({ mode = "symbol_text", max_width = max_width })(entry, vim_item)
+            local strings = vim.split(kind.kind, "%s", { trimempty = true })
+            kind.kind = " " .. (strings[1] or "") .. " "
+            kind.abbr = kind.abbr .. string.rep(" ", max_width - #kind.abbr)
+            return kind
+          end,
+          fields = { "kind", "abbr" },
+          expandable_indicator = false,
         },
       })
     end,
@@ -881,6 +905,7 @@ require("lazy").setup({
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
   require("custom.lang.clangd"),
   require("custom.lang.vue"),
+  require("custom.lang.python"),
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
