@@ -15,7 +15,7 @@ return {
             clangdFileStatus = true,
           },
         },
-        neocmake = {},
+        ["cmake-language-server"] = {},
         ["clang-format"] = {},
       },
     },
