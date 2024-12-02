@@ -77,6 +77,9 @@ vim.opt.expandtab = true
 -- 限制补全菜单一页的项目数
 vim.opt.pumheight = 10
 
+-- 不进行自动换行
+vim.opt.wrap = false
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
