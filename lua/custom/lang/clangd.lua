@@ -32,7 +32,7 @@ return {
     "mfussenegger/nvim-dap",
     opts = {
       servers = {
-        "cpptools",
+        "codelldb",
       },
     },
   },
