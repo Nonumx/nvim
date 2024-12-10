@@ -117,7 +117,7 @@ vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper win
 vim.keymap.set({ "n" }, "<C-s>", "<cmd>:w<CR>")
 
 -- CV大法
-vim.keymap.set({ "n", "v" }, "<C-c>", "+y")
+vim.keymap.set("v", "<C-c>", '"+y')
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -857,6 +857,8 @@ require("lazy").setup({
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
+      local comment = require("mini.comment")
+      comment.setup()
     end,
   },
   { -- Highlight, edit, and navigate code
@@ -912,9 +914,6 @@ require("lazy").setup({
   -- require 'kickstart.plugins.autopairs',
   -- require 'kickstart.plugins.neo-tree',
   -- require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
-  -- require("custom.lang.clangd"),
-  -- require("custom.lang.vue"),
-  -- require("custom.lang.python"),
 
   -- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
   --    This is the easiest way to modularize your config.
