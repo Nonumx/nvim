@@ -48,4 +48,18 @@ return {
       },
     },
   },
+
+  -- 文件管理器
+  {
+    "nvim-tree/nvim-tree.lua",
+    cmd = { "NvimTreeFocus" },
+    opts = {},
+    keys = {
+      {
+        "<leader>e",
+        "<cmd>NvimTreeFocus<cr>",
+        desc = "Open File Explorer",
+      },
+    },
+  },
 }
