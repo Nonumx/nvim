@@ -23,8 +23,7 @@ return {
   {
     "folke/which-key.nvim",
     event = "VeryLazy",
-    opts = {
-    },
+    opts = {},
     keys = {
       {
         "<leader>?",
@@ -32,6 +31,20 @@ return {
           require("which-key").show({ global = false })
         end,
         desc = "Buffer Local Keymaps (which-key)",
+      },
+    },
+  },
+
+  -- 缩进高亮
+  {
+    "shellRaining/hlchunk.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      chunk = {
+        enable = true,
+      },
+      line_num = {
+        enable = true,
       },
     },
   },
