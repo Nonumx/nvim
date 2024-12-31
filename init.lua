@@ -13,6 +13,10 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
+-- 注册 LazyFile 事件（来自LazyVim配置)
+local Event = require("lazy.core.handler.event")
+Event.mappings.LazyFile = { id = "LazyFile", event = { "BufReadPost", "BufNewFile", "BufWritePre" } }
+
 -- [[ 安装插件 & 配置插件 ]]
 require("lazy").setup({
   spec = {
