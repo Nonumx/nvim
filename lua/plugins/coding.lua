@@ -23,4 +23,37 @@ return {
     event = "VeryLazy",
     opts = {},
   },
+
+  -- LSP功能
+  {
+    "nvimdev/lspsaga.nvim",
+    event = "LspAttach",
+    opts = {
+      lightbulb = {
+        enable = false,
+      },
+    },
+    keys = {
+      {
+        "<leader>ca",
+        "<cmd>Lspsaga code_action<cr>",
+        desc = "[LSP] Code Action",
+      },
+      {
+        "gd",
+        "<cmd>Lspsaga goto_definition<cr>",
+        desc = "[LSP] Goto Definition",
+      },
+      {
+        "<leader>d",
+        "<cmd>Lspsaga hover_doc<cr>",
+        desc = "[LSP] Hover Doc",
+      },
+      {
+        "<F2>",
+        "<cmd>Lspsaga rename<cr>",
+        desc = "[LSP] Rename",
+      },
+    },
+  },
 }
