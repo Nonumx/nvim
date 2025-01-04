@@ -48,4 +48,11 @@ return {
       }
     end,
   },
+
+  -- HTML标签自动回括
+  {
+    "windwp/nvim-ts-autotag",
+    event = "InsertEnter",
+    opts = {},
+  }
 }
