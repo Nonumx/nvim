@@ -10,13 +10,14 @@ return {
       -- 使用blink.cmp作为补全插件
       "saghen/blink.cmp",
     },
-    config = function()
+    config = function(_, opts)
       require("mason").setup()
       require("mason-lspconfig").setup_handlers({
         function(server_name)
+          local server = opts.servers[server_name] or {}
           -- 整合 capabilities
-          local capabilities = require("blink.cmp").get_lsp_capabilities()
-          require("lspconfig")[server_name].setup({ capabilities = capabilities })
+          server.capabilities = require("blink.cmp").get_lsp_capabilities()
+          require("lspconfig")[server_name].setup(server)
         end,
       })
     end,
