@@ -12,4 +12,11 @@ return {
     event = "LazyFile",
     opts = {},
   },
+
+  -- 状态栏
+  {
+    "echasnovski/mini.statusline",
+    version = "*",
+    opts = {},
+  },
 }
