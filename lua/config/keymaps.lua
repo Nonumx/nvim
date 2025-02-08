@@ -30,3 +30,5 @@ vim.keymap.set("v", "<C-c>", '"+y')
 vim.keymap.set({ "n", "v" }, "<C-v>", '"+p')
 vim.keymap.set("i", "<C-v>", '<esc>"+pi')
 
+-- 免去按 <Shift> 的问题（我这键盘 <Shift> 也不灵敏）
+vim.keymap.set("n", ";", ":", { desc = "CMD enter command mode" })

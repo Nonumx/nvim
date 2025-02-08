@@ -1,3 +1,4 @@
+-- [[ 代码格式化 ]]
 return {
   "stevearc/conform.nvim",
   event = { "BufWritePre" },
@@ -40,3 +41,4 @@ return {
     },
   },
 }
+
