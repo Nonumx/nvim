@@ -17,6 +17,12 @@ return {
     opts = {},
     event = "VeryLazy",
   },
+  -- [[ HTML标签自动回括 ]]
+  {
+    "windwp/nvim-ts-autotag",
+    ft = { "vue" },
+    opts = {},
+  },
   -- [[ 增强配置编写补全 ]]
   {
     "folke/lazydev.nvim",
