@@ -26,4 +26,9 @@ return {
       },
     },
   },
+  -- [[ 更好的ui组件 ]]
+  {
+    "stevearc/dressing.nvim",
+    opts = {},
+  },
 }
