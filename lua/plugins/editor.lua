@@ -17,5 +17,10 @@ return {
       },
     },
   },
+  -- [[ Git状态 ]]
+  {
+    "lewis6991/gitsigns.nvim",
+    event = "LazyFile",
+    opts = {},
+  },
 }
-
