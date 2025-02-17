@@ -3,6 +3,7 @@ return {
   {
     "echasnovski/mini.statusline",
     version = "*",
+    ---@module 'mini.statusline'
     opts = {
       content = {
         active = function()
@@ -13,6 +14,7 @@ return {
           local lsp = MiniStatusline.section_lsp({ trunc_width = 75 })
           local filename = MiniStatusline.section_filename({ trunc_width = 140 })
           local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+          local location = "%l|%v"
 
           return MiniStatusline.combine_groups({
             { hl = mode_hl, strings = { mode } },
@@ -21,6 +23,7 @@ return {
             { hl = "MiniStatuslineFilename", strings = { filename } },
             "%=", -- End left alignment
             { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
+            { hl = mode_hl, strings = { location } },
           })
         end,
       },
