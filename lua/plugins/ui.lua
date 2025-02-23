@@ -34,4 +34,9 @@ return {
     "stevearc/dressing.nvim",
     opts = {},
   },
+  -- [[ 图标库 ]]
+  {
+    "nvim-tree/nvim-web-devicons",
+    opts = {},
+  },
 }
