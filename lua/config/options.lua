@@ -1,60 +1,25 @@
--- Make line numbers default
-vim.opt.number = true
-vim.opt.numberwidth = 2
-vim.opt.ruler = false
-vim.opt.fillchars = { eob = " " }
+-- [[ 基本设置 ]]
 
--- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = "a"
+local o = vim.opt
 
--- Don't show the mode, since it's already in the status line
-vim.opt.showmode = false
+o.number = true -- 显示行号
+o.fillchars = { eob = " " } -- 关闭文件末尾的 '~' 符号
+o.mouse = "a" -- 允许使用鼠标，例如重置窗口大小
+o.showmode = false -- 不在命令行中显示编辑模式
+o.breakindent = true -- 换行后的代码保持与原行相同的缩进
+o.cursorline = true -- 高亮当前行
+o.expandtab = true -- 使用空格而不是制表符
+o.tabstop = 2 -- 默认两个空格
+o.wrap = false -- 不进行自动换行
+o.updatetime = 300 -- 插件触发频率
+o.shortmess = vim.tbl_deep_extend("force", vim.opt.shortmess:get(), { s = true, I = true, c = true, C = true }) -- 禁用搜索、欢迎、补全的信息 
+o.writebackup = false -- 禁用文件覆盖时的备份功能
+o.completeopt = "menuone,noselect" -- 调整补全菜单
 
--- Enable break indent
-vim.opt.breakindent = true
+-- 显式展示空格、制表符
+o.list = true
+o.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
--- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-
--- Keep signcolumn on by default
-vim.opt.signcolumn = "yes"
-
--- Decrease update time
-vim.opt.updatetime = 250
-
--- Decrease mapped sequence wait time
--- Displays which-key popup sooner
-vim.opt.timeoutlen = 300
-
--- Configure how new splits should be opened
-vim.opt.splitright = true
-vim.opt.splitbelow = true
-
--- Sets how neovim will display certain whitespace characters in the editor.
---  See `:help 'list'`
---  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
-
--- Preview substitutions live, as you type!
-vim.opt.inccommand = "split"
-
--- Show which line your cursor is on
-vim.opt.cursorline = true
-
--- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
-
--- Use spaces instead of tabs
-vim.opt.expandtab = true
-
--- 限制补全菜单一页的项目数
-vim.opt.pumheight = 10
-
--- 不进行自动换行
-vim.opt.wrap = false
-
--- 不显示开始界面
-vim.opt.shortmess:append("sI")
-
+-- 搜索时智能判断大小写
+o.ignorecase = true
+o.smartcase = true
