@@ -2,6 +2,7 @@ return {
   -- 图标库
   {
     "echasnovski/mini.icons",
+    event = "VeryLazy",
     opts = {},
   },
   -- UI组件库
@@ -32,7 +33,7 @@ return {
   -- 状态栏
   {
     "echasnovski/mini.statusline",
-    event = "UiEnter",
+    event = "VeryLazy",
     opts = {},
   },
 }

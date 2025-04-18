@@ -1,6 +1,7 @@
 -- LSP配置
 return {
   "neovim/nvim-lspconfig",
+  event = "LazyFile",
   dependencies = {
     {
       "williamboman/mason.nvim",

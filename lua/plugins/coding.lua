@@ -8,15 +8,15 @@ return {
   -- 括号匹配
   {
     "echasnovski/mini.pairs",
+    event = "VeryLazy",
     version = "*",
     opts = {},
-    event = "VeryLazy",
   },
   -- 注释插件
   {
     "folke/ts-comments.nvim",
-    opts = {},
     event = "VeryLazy",
+    opts = {},
   },
   -- HTML标签回括
   {
@@ -39,6 +39,7 @@ return {
   -- 代码补全
   {
     "echasnovski/mini.completion",
+    event = "InsertEnter",
     dependencies = {
       "echasnovski/mini.snippets",
     },

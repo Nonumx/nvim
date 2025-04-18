@@ -35,6 +35,7 @@ return {
   -- 动效缩进
   {
     "echasnovski/mini.indentscope",
+    event = "LazyFile",
     opts = {},
   },
 }
