@@ -28,6 +28,7 @@ return {
           "stylua",
         },
       },
+      cmd = "MasonToolsInstall",
     },
   },
   opts = function()

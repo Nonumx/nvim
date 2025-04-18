@@ -20,6 +20,7 @@ Event.mappings.LazyFile = { id = "LazyFile", event = { "BufReadPost", "BufNewFil
 require("lazy").setup({
   spec = {
     { import = "plugins" },
+    { import = "plugins.lang" },
   },
   install = { colorscheme = { "rose-pine-dwan", "habamax" } },
   ui = {
