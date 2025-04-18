@@ -14,6 +14,20 @@ return {
           },
         },
       },
+      cmd = "Mason",
+    },
+    {
+      "williamboman/mason-lspconfig.nvim",
+      opts = {},
+    },
+    {
+      "WhoIsSethDaniel/mason-tool-installer.nvim",
+      opts = {
+        ensure_installed = {
+          "lua-language-server",
+          "stylua",
+        },
+      },
     },
   },
   opts = function()
@@ -37,17 +51,13 @@ return {
       end,
     })
 
-    return {
-      servers = {
-        lua_ls = {},
-        basedpyright = {},
-      },
-    }
+    return {}
   end,
   config = function(_, opts)
-    local lspconfig = require("lspconfig")
-    for server, config in pairs(opts.servers) do
-      lspconfig[server].setup(config)
-    end
+    require("mason-lspconfig").setup_handlers({
+      function(server_name) -- default handler (optional)
+        require("lspconfig")[server_name].setup({})
+      end,
+    })
   end,
 }
