@@ -17,6 +17,10 @@ return {
       "query",
       "vim",
       "vimdoc",
+      "python",
+      "cpp",
+      "yaml",
+      "toml",
     },
     highlight = {
       enable = true,

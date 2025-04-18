@@ -3,8 +3,8 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
-        "basedpyright",
-        { "ruff", version = "0.11.5" },
+        "clangd",
+        "clang-format",
       })
       return opts
     end,
@@ -13,7 +13,7 @@ return {
     "stevearc/conform.nvim",
     opts = {
       formatters_by_ft = {
-        python = { "ruff" },
+        cpp = "clang-format",
       },
     },
   },
