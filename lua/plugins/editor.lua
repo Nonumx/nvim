@@ -14,18 +14,6 @@ return {
       },
     },
   },
-  -- 文件资源管理器
-  {
-    "stevearc/oil.nvim",
-    ---@module 'oil'
-    ---@type oil.SetupOpts
-    opts = function()
-      vim.keymap.set("n", "-", "<cmd>Oil<cr>", { desc = "Open parent directory" })
-
-      return {}
-    end,
-    lazy = false,
-  },
   -- Git状态
   {
     "lewis6991/gitsigns.nvim",

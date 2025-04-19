@@ -21,6 +21,10 @@ return {
       "cpp",
       "yaml",
       "toml",
+      "javascript",
+      "typescript",
+      "tsx",
+      "css",
     },
     highlight = {
       enable = true,
