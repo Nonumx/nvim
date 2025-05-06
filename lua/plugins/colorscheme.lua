@@ -5,6 +5,6 @@ return {
   priority = 1000,
   lazy = false,
   opts = function()
-    vim.cmd("colorscheme rose-pine-dawn")
+    vim.cmd("colorscheme rose-pine")
   end,
 }

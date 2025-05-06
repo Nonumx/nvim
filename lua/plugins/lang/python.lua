@@ -4,7 +4,7 @@ return {
     opts = function(_, opts)
       vim.list_extend(opts.ensure_installed, {
         "basedpyright",
-        { "ruff", version = "0.11.5" },
+        "ruff",
       })
       return opts
     end,
