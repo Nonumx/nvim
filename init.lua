@@ -9,20 +9,10 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end ---@diagnostic disable-next-line: undefined-field
 vim.opt.rtp:prepend(lazypath)
 
--- 使用空格作为 <leader> 键
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-
--- 注册 LazyFile 事件（来自LazyVim配置)
-local Event = require("lazy.core.handler.event")
-Event.mappings.LazyFile = { id = "LazyFile", event = { "BufReadPost", "BufNewFile", "BufWritePre" } }
-
 require("lazy").setup({
   spec = {
-    { import = "plugins" },
-    { import = "plugins.lang" },
+    import = "plugins",
   },
-  install = { colorscheme = { "rose-pine-dwan", "habamax" } },
   ui = {
     icons = {
       loaded = "",

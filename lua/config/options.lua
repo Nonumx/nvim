@@ -1,5 +1,10 @@
 -- [[ 基本设置 ]]
 
+-- 使用空格作为 <leader> 键
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
+-- 简写配置
 local o = vim.opt
 
 o.number = true -- 显示行号

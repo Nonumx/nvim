@@ -12,14 +12,15 @@ return {
     lazy = false,
     ---@type snacks.Config
     opts = {
-      -- your configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
+      debug = { enabled = true },
       explorer = { replace_netrw = true },
+      indent = { enabled = true },
       input = { enabled = true },
       notifier = { enabled = true },
       picker = { enabled = true },
-      terminal = { terminal = "pwsh.exe" },
+      scope = { enabled = true },
+      statuscolumn = { enabled = true },
+      terminal = { enabled = true },
     },
     keys = {
       -- Top Pickers & Explorer
@@ -66,11 +67,5 @@ return {
         desc = "Toggle Terminal",
       },
     },
-  },
-  -- 状态栏
-  {
-    "echasnovski/mini.statusline",
-    event = "VeryLazy",
-    opts = {},
   },
 }

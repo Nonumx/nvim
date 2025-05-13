@@ -14,16 +14,4 @@ return {
       },
     },
   },
-  -- Git状态
-  {
-    "lewis6991/gitsigns.nvim",
-    event = "LazyFile",
-    opts = {},
-  },
-  -- 动效缩进
-  {
-    "echasnovski/mini.indentscope",
-    event = "LazyFile",
-    opts = {},
-  },
 }
