@@ -6,8 +6,34 @@ return {
     dependencies = {
       { "williamboman/mason-lspconfig.nvim", opts = {} },
     },
-    opts = {},
-    config = function(_, opts) end,
+    opts = {
+      servers = {
+        clangd = {
+          keys = {
+            { "<M-o>", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
+          },
+          cmd = {
+            "clangd",
+            "--background-index",
+            "--clang-tidy",
+            "--header-insertion=never",
+            "--completion-style=detailed",
+            "--function-arg-placeholders",
+            "--fallback-style=google",
+          },
+          init_options = {
+            usePlaceholders = true,
+            completeUnimported = true,
+            clangdFileStatus = true,
+          },
+        },
+      },
+    },
+    config = function(_, opts)
+      for server_name, server_options in pairs(opts.servers) do
+        vim.lsp.config(server_name, server_options)
+      end
+    end,
   },
   {
     "williamboman/mason.nvim",
@@ -27,6 +53,8 @@ return {
       ensure_installed = {
         "lua-language-server",
         "stylua",
+        "clangd",
+        "clang-format",
       },
     },
   },
