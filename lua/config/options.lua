@@ -29,3 +29,5 @@ o.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 -- 搜索时智能判断大小写
 o.ignorecase = true
 o.smartcase = true
+
+o.laststatus = 3 -- 只使用一个状态栏
