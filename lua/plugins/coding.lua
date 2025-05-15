@@ -7,18 +7,43 @@ return {
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-      keymap = { preset = "super-tab" },
+      keymap = {
+        preset = "super-tab",
+      },
       appearance = {
         nerd_font_variant = "normal",
       },
       signature = { enabled = true },
       sources = {
-        default = { "lazydev", "lsp", "path", "snippets", "buffer" },
+        default = { "lazydev", "lsp", "path", "snippets", "buffer", "minuet" },
         providers = {
           lazydev = {
             name = "LazyDev",
             module = "lazydev.integrations.blink",
             score_offset = 100,
+          },
+          minuet = {
+            name = "minuet",
+            module = "minuet.blink",
+            async = true,
+            -- Should match minuet.config.request_timeout * 1000,
+            -- since minuet.config.request_timeout is in seconds
+            timeout_ms = 3000,
+            score_offset = 50, -- Gives minuet higher priority among suggestions
+          },
+        },
+      },
+      completion = {
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 300,
+        },
+        menu = {
+          draw = {
+            columns = {
+              { "kind_icon", "label" },
+              { "kind" },
+            },
           },
         },
       },
