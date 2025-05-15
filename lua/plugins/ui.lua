@@ -71,6 +71,7 @@ return {
   -- 状态栏
   {
     "nvim-lualine/lualine.nvim",
+    event = "UiEnter",
     opts = {},
   },
 }

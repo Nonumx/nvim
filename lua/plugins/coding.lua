@@ -2,6 +2,7 @@ return {
   -- 自动补全引擎
   {
     "saghen/blink.cmp",
+    event = "VeryLazy",
     dependencies = { "rafamadriz/friendly-snippets" },
     version = "1.*",
     ---@module 'blink.cmp'
