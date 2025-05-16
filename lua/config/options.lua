@@ -31,3 +31,5 @@ o.ignorecase = true
 o.smartcase = true
 
 o.laststatus = 3 -- 只使用一个状态栏
+o.statusline = " " -- 状态栏插件加载完成前保持为空
+o.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
