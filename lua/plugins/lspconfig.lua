@@ -55,6 +55,7 @@ return {
         "stylua",
         "clangd",
         "clang-format",
+        "neocmakelsp",
       },
     },
   },
