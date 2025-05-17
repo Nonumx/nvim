@@ -11,6 +11,7 @@
   "mason-tool-installer.nvim": { "branch": "main", "commit": "75d60a8f928decd8b38897f80849768b7c540a5b" },
   "mason.nvim": { "branch": "main", "commit": "7c7318e8bae7e3536ef6b9e86b9e38e74f2e125e" },
   "mini.icons": { "branch": "main", "commit": "397ed3807e96b59709ef3292f0a3e253d5c1dc0a" },
+  "mini.pairs": { "branch": "main", "commit": "7e834c5937d95364cc1740e20d673afe2d034cdb" },
   "minuet-ai.nvim": { "branch": "main", "commit": "f2cf7948c6dfe25c557dc78d84d160bc9923cd7d" },
   "nvim-lspconfig": { "branch": "master", "commit": "5a137448fd921a0c5d3939cb75e60d21f64e4606" },
   "nvim-luapad": { "branch": "master", "commit": "176686eb616a5ada5dfc748f2b5109194bbe8a71" },

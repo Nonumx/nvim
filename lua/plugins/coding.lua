@@ -66,4 +66,11 @@ return {
     "rafcamlet/nvim-luapad",
     cmd = "Luapad",
   },
+  -- 括号自动回括
+  {
+    "echasnovski/mini.pairs",
+    event = "VeryLazy",
+    version = "*",
+    opts = {},
+  },
 }
