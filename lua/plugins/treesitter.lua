@@ -18,6 +18,7 @@ return {
       "vim",
       "vimdoc",
       "cpp",
+      "python",
     },
     highlight = {
       enable = true,

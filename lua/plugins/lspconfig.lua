@@ -57,6 +57,8 @@ return {
         "clangd",
         "clang-format",
         "neocmakelsp",
+        "basedpyright",
+        "ruff",
       },
     },
   },
