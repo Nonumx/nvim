@@ -30,5 +30,5 @@ map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
 map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
 
 -- 终端
-map("n", "<c-`>", function() Snacks.terminal() end, { desc = "Terminal" })
-map("t", "<C-`>", "<cmd>close<cr>", { desc = "Hide Terminal" })
+map("n", "<M-`>", function() Snacks.terminal() end, { desc = "Terminal" })
+map("t", "<M-`>", "<cmd>close<cr>", { desc = "Hide Terminal" })
