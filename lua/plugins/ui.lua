@@ -23,7 +23,6 @@ return {
       terminal = { enabled = true },
     },
     keys = {
-      -- Top Pickers & Explorer
       {
         "<leader><space>",
         function()
