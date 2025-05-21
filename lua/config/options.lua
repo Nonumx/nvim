@@ -20,7 +20,7 @@ o.wrap = false -- 不进行自动换行
 o.updatetime = 300 -- 插件触发频率
 o.shortmess = vim.tbl_deep_extend("force", vim.opt.shortmess:get(), { s = true, I = true, c = true, C = true }) -- 禁用搜索、欢迎、补全的信息
 o.writebackup = false -- 禁用文件覆盖时的备份功能
-o.completeopt = "menuone,noselect" -- 调整补全菜单
+o.completeopt = "menu,menuone,noselect" -- 调整补全菜单
 
 -- 显式展示空格、制表符
 o.list = true

@@ -59,13 +59,6 @@ return {
         end,
         desc = "File Explorer",
       },
-      {
-        "<leader>tt",
-        function()
-          Snacks.terminal()
-        end,
-        desc = "Toggle Terminal",
-      },
     },
   },
   -- 状态栏

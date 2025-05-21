@@ -18,3 +18,17 @@ map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- 使用分号代替冒号（少按一个 <Shift> 键）
 map("n", ";", ":", { desc = "CMD enter command mode" })
+
+
+-- 保存文件
+map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+
+-- lazy
+map("n", "<leader>l", "<cmd>Lazy<cr>", { desc = "Lazy" })
+
+-- quit
+map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
+
+-- 终端
+map("n", "<c-`>", function() Snacks.terminal() end, { desc = "Terminal" })
+map("t", "<C-`>", "<cmd>close<cr>", { desc = "Hide Terminal" })
