@@ -49,7 +49,7 @@ return {
   },
   {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
-    event = "VeryLazy",
+    cmd = "MasonToolsInstall",
     opts = {
       ensure_installed = {
         "lua-language-server",
