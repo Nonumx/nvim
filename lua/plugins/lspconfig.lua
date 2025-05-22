@@ -9,9 +9,6 @@ return {
     opts = {
       servers = {
         clangd = {
-          keys = {
-            { "<M-o>", "<cmd>ClangdSwitchSourceHeader<cr>", desc = "Switch Source/Header (C/C++)" },
-          },
           cmd = {
             "clangd",
             "--background-index",
@@ -30,6 +27,20 @@ return {
       },
     },
     config = function(_, opts)
+      vim.api.nvim_create_autocmd("LspAttach", {
+        callback = function(args)
+          local client = vim.lsp.get_client_by_id(args.data.client_id)
+          if client and client.name == "clangd" then
+            vim.keymap.set(
+              "n",
+              "<M-o>",
+              "<cmd>LspClangdSwitchSourceHeader<cr>",
+              { desc = "Switch Source/Header (C/C++)" }
+            )
+          end
+        end,
+      })
+
       for server_name, server_options in pairs(opts.servers) do
         vim.lsp.config(server_name, server_options)
       end
