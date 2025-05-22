@@ -19,6 +19,7 @@ return {
       "vimdoc",
       "cpp",
       "python",
+      "cmake",
     },
     highlight = {
       enable = true,
