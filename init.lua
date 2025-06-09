@@ -255,3 +255,9 @@ later(function()
   add({ source = "j-hui/fidget.nvim" })
   require("fidget").setup({})
 end)
+
+-- [[ Git状态 ]]
+later(function()
+  add({ source = "lewis6991/gitsigns.nvim" })
+  require("gitsigns").setup({ trouble = true })
+end)
