@@ -249,3 +249,9 @@ later(function()
     },
   })
 end)
+
+-- [[ 进度条 ]]
+later(function()
+  add({ source = "j-hui/fidget.nvim" })
+  require("fidget").setup({})
+end)
