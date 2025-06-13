@@ -83,6 +83,10 @@ now(function()
 
   -- quit
   map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
+
+  -- LSP快捷键
+  map("n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" })
+  map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
 end)
 
 -- [[ 颜色主题 ]]
