@@ -53,7 +53,6 @@ now(function()
 
   o.laststatus = 3 -- 只使用一个状态栏
   o.statusline = " " -- 状态栏插件加载完成前保持为空
-  o.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
 end)
 
 -- [[ 键盘映射 ]]
@@ -118,6 +117,7 @@ now(function()
     indent = { enabled = true },
     scope = { enabled = true },
   })
+  vim.opt.statuscolumn = [[%!v:lua.require'snacks.statuscolumn'.get()]]
   local map = vim.keymap.set
   map("n", "<leader>e", function()
     Snacks.explorer()
