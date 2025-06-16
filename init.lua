@@ -133,6 +133,11 @@ now(function()
   end, { desc = "Picker: Grep Workspace" })
 end)
 
+-- [[ 通用库 ]]
+later(function()
+  add({ source = "nvim-lua/plenary.nvim" })
+end)
+
 -- [[ 自动配对 ]]
 later(function()
   add({ source = "echasnovski/mini.pairs" })
@@ -259,7 +264,7 @@ end)
 -- [[ 进度条 ]]
 later(function()
   add({ source = "j-hui/fidget.nvim" })
-  require("fidget").setup({})
+  require("fidget").setup()
 end)
 
 -- [[ Git状态 ]]
