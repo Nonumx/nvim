@@ -1,3 +1,7 @@
+local path_package = vim.fn.stdpath("data") .. "/site/pack/deps/"
+local mini_deps_path = path_package .. "start/mini.deps"
+local snacks_path = path_package .. "opt/snacks.nvim"
+
 return {
   cmd = { "lua-language-server" },
   filetypes = { "lua" },
@@ -42,6 +46,8 @@ return {
           -- here.
           --
           "${3rd}/luv/library",
+          mini_deps_path,
+          snacks_path,
         },
         -- Or pull in all of 'runtimepath'.
         -- NOTE: this is a lot slower and will cause issues when working on
