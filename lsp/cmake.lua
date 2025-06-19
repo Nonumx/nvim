@@ -1,24 +1,35 @@
+local Job = require("plenary.job")
+
 local M = {}
 
 M.vswhere_path = vim.fn.stdpath("data") .. "/tools/vswhere.exe"
+---@type string?
+M.vspath = nil
+---@type Job?
+M.vsdevcmd = nil
+---@type string[]
+M.stdout_cache = {}
 
 M.warn_vswhere_on_first = true
-
 M.warn_vspath_on_first = true
 
 M.name = "lsp/cmake"
 
-M.auto_reconfigure = function()
-  local Job = require("plenary.job")
+function M:setup_vsdevcmd()
+  -- Found Visual Studio or No Visual Studio
+  if self.vspath ~= nil or not M.warn_vspath_on_first then
+    return
+  end
+
   ---@diagnostic disable-next-line:missing-fields
-  local res = Job:new({
+  local found = Job:new({
     command = M.vswhere_path,
     args = {
       "-property",
       "installationPath",
     },
   }):sync()
-  if res == nil then
+  if found == nil then
     if M.warn_vspath_on_first then
       local message = {
         "Failed to locate `Visual Studio`",
@@ -30,35 +41,45 @@ M.auto_reconfigure = function()
     end
     return
   end
-  local vspath = res[1]
-  local vcvars_path = vspath .. [[\VC\Auxiliary\Build\vcvarsall.bat]]
-  local command_args = {
-    "%VCVars% x64",
-    "powershell.exe -c cmake.exe -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE",
-  }
-  ---@diagnostic disable-next-line:missing-fields
-  Job:new({
+  -- Assuming the user will not uninstall Visual Studio during coding
+  M.vspath = found[1]
+
+  local vcvars_path = self.vspath .. [[\VC\Auxiliary\Build\vcvarsall.bat]]
+  ---@diagnostic disable-next-line missing-fields
+  self.vsdevcmd = Job:new({
     command = "cmd.exe",
     args = {
-      "/c",
-      table.concat(command_args, " && "),
+      "/k",
+      "%VCVars% x64",
     },
     env = {
       VCVars = string.format('"%s"', vcvars_path),
     },
-    on_exit = function(j, return_val)
-      -- on_exit在异步上下文中
-      -- vim.notify必须在安全上下文中执行
+    on_stdout = function(_, data)
+      if data ~= "" then
+        table.insert(M.stdout_cache, data)
+      else
+        vim.schedule(function()
+          vim.notify(table.concat(M.stdout_cache, "\n"), "info", { title = self.name })
+          M.stdout_cache = {}
+        end)
+      end
+    end,
+    on_exit = function(_, code)
       vim.schedule(function()
-        local j_message = table.concat(j:result() or {}, "\n")
-        if return_val == 0 then
-          vim.notify(j_message, "info", { title = M.name })
-        else
-          vim.notify(j_message, "warn", { title = M.name })
-        end
+        vim.notify("cmd exit with code " .. code, "info", { title = self.name })
       end)
     end,
-  }):start()
+  })
+  self.vsdevcmd:start()
+end
+
+function M:cmake_configure()
+  if self.vsdevcmd == nil then
+    return
+  end
+
+  self.vsdevcmd:send("cmake.exe -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE\n")
 end
 
 return {
@@ -83,11 +104,16 @@ return {
       end
       return
     end
+
+    M:setup_vsdevcmd()
+
     local cmake_augroup = vim.api.nvim_create_augroup("CMakeAugroup", { clear = true })
     vim.api.nvim_create_autocmd("BufWritePost", {
       group = cmake_augroup,
       pattern = { "CMakeLists.txt", "*.cmake" },
-      callback = M.auto_reconfigure,
+      callback = function()
+        M:cmake_configure()
+      end,
     })
   end,
 }
