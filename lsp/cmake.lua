@@ -82,6 +82,41 @@ function M:cmake_configure()
   self.vsdevcmd:send("cmake.exe -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE\n")
 end
 
+function M:cmake_build()
+  if self.vsdevcmd == nil then
+    return
+  end
+
+  self.vsdevcmd:send("cmake.exe --build build\n")
+end
+
+function M:cmake_clean()
+  if self.vsdevcmd == nil then
+    return
+  end
+
+  self.vsdevcmd:send("cmake.exe --build build --target clean\n")
+end
+
+function M:cmake_run()
+  local build_dir = vim.loop.cwd() .. "/build/"
+  local executables = vim.fn.globpath(build_dir, "*.exe", false, true)
+  local targets = {}
+  for _, executable in ipairs(executables) do
+    local exe_name = vim.fn.fnamemodify(executable, ":t")
+    table.insert(targets, exe_name)
+  end
+  vim.ui.select(targets, {
+    prompt = "Please select a target to run",
+    format_item = function(item)
+      return "👉 " .. item
+    end,
+  }, function(choice)
+    local executable = build_dir .. "/" .. choice
+    Snacks.terminal("cmd /k " .. executable)
+  end)
+end
+
 return {
   cmd = { "cmake-language-server" },
   filetypes = { "cmake" },
@@ -115,5 +150,18 @@ return {
         M:cmake_configure()
       end,
     })
+
+    vim.api.nvim_create_user_command("CMakeConfigure", function()
+      M:cmake_configure()
+    end, { desc = "CMake configure" })
+    vim.api.nvim_create_user_command("CMakeBuild", function()
+      M:cmake_build()
+    end, { desc = "CMake build" })
+    vim.api.nvim_create_user_command("CMakeClean", function()
+      M:cmake_clean()
+    end, { desc = "CMake clean" })
+    vim.api.nvim_create_user_command("CMakeRun", function()
+      M:cmake_run()
+    end, { desc = "CMake run" })
   end,
 }
