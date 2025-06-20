@@ -16,6 +16,21 @@ M.warn_vspath_on_first = true
 M.name = "lsp/cmake"
 
 function M:setup_vsdevcmd()
+  if not vim.loop.fs_stat(M.vswhere_path) then
+    if M.warn_vswhere_on_first then
+      local message = {
+        "Failed to locate `vswhere.exe`",
+        "Please copy `vswhere.exe` to following path:",
+        "```lua",
+        'vim.fn.stdpath("data") .. "/tools/"',
+        "```",
+      }
+      vim.notify(table.concat(message, "\n"), "warn", { title = M.name })
+      M.warn_vswhere_on_first = false
+    end
+    return
+  end
+
   -- Found Visual Studio or No Visual Studio
   if self.vspath ~= nil or not M.warn_vspath_on_first then
     return
@@ -36,7 +51,7 @@ function M:setup_vsdevcmd()
         "Please verify you have VS2017 or above",
         "installed on your machine",
       }
-      vim.notify(table.concat(message, "\n"), "warn", { title = "lsp/cmake" })
+      vim.notify(table.concat(message, "\n"), "warn", { title = M.name })
       M.warn_vspath_on_first = false
     end
     return
@@ -45,6 +60,7 @@ function M:setup_vsdevcmd()
   M.vspath = found[1]
 
   local vcvars_path = self.vspath .. [[\VC\Auxiliary\Build\vcvarsall.bat]]
+  -- Launch cmd.exe in the background and wait for cmake command
   ---@diagnostic disable-next-line missing-fields
   self.vsdevcmd = Job:new({
     command = "cmd.exe",
@@ -106,6 +122,10 @@ function M:cmake_run()
     local exe_name = vim.fn.fnamemodify(executable, ":t")
     table.insert(targets, exe_name)
   end
+  if #targets == 0 then
+    vim.notify("No targets in the build directory", "warn", { title = M.name })
+    return
+  end
   vim.ui.select(targets, {
     prompt = "Please select a target to run",
     format_item = function(item)
@@ -124,22 +144,7 @@ return {
   init_options = {
     buildDirectory = "build",
   },
-  on_attach = function()
-    if not vim.loop.fs_stat(M.vswhere_path) then
-      if M.warn_vswhere_on_first then
-        local message = {
-          "Failed to locate `vswhere.exe`",
-          "Please copy `vswhere.exe` to following path:",
-          "```lua",
-          'vim.fn.stdpath("data") .. "/tools/"',
-          "```",
-        }
-        vim.notify(table.concat(message, "\n"), "warn", { title = M.name })
-        M.warn_vswhere_on_first = false
-      end
-      return
-    end
-
+  on_init = function()
     M:setup_vsdevcmd()
 
     local cmake_augroup = vim.api.nvim_create_augroup("CMakeAugroup", { clear = true })
