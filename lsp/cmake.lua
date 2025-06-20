@@ -168,5 +168,7 @@ return {
     vim.api.nvim_create_user_command("CMakeRun", function()
       M:cmake_run()
     end, { desc = "CMake run" })
+
+    vim.keymap.set("n", "<F5>", "<cmd>CMakeRun<cr>", { desc = "CMake: Run Target" })
   end,
 }
