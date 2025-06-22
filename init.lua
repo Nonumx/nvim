@@ -159,6 +159,18 @@ later(function()
   end, { desc = "Buffer Local Keymaps (which-key)" })
 end)
 
+-- [[ 进度条 ]]
+later(function()
+  add({ source = "j-hui/fidget.nvim" })
+  require("fidget").setup()
+end)
+
+-- [[ Git状态 ]]
+later(function()
+  add({ source = "lewis6991/gitsigns.nvim" })
+  require("gitsigns").setup({ trouble = true })
+end)
+
 -- [[ LSP配置 ]]
 later(function()
   local lsp_dir = vim.fn.stdpath("config") .. "/lsp/"
@@ -259,16 +271,4 @@ later(function()
       },
     },
   })
-end)
-
--- [[ 进度条 ]]
-later(function()
-  add({ source = "j-hui/fidget.nvim" })
-  require("fidget").setup()
-end)
-
--- [[ Git状态 ]]
-later(function()
-  add({ source = "lewis6991/gitsigns.nvim" })
-  require("gitsigns").setup({ trouble = true })
 end)
