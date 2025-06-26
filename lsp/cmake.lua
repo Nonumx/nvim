@@ -15,6 +15,10 @@ M.warn_vspath_on_first = true
 
 M.name = "lsp/cmake"
 
+function M.is_win()
+  return vim.uv.os_uname().sysname:find("Windows") ~= nil
+end
+
 function M:setup_vsdevcmd()
   if not vim.loop.fs_stat(M.vswhere_path) then
     if M.warn_vswhere_on_first then
@@ -91,50 +95,56 @@ function M:setup_vsdevcmd()
 end
 
 function M:cmake_configure()
-  if self.vsdevcmd == nil then
-    return
+  if self.vsdevcmd ~= nil then
+    self.vsdevcmd:send(
+      "cmake.exe -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE\n"
+    )
   end
-
-  self.vsdevcmd:send("cmake.exe -B build -G Ninja -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS:BOOL=TRUE\n")
 end
 
 function M:cmake_build()
-  if self.vsdevcmd == nil then
-    return
+  if self.vsdevcmd ~= nil then
+    self.vsdevcmd:send("cmake.exe --build build\n")
   end
-
-  self.vsdevcmd:send("cmake.exe --build build\n")
 end
 
 function M:cmake_clean()
-  if self.vsdevcmd == nil then
-    return
+  if self.vsdevcmd ~= nil then
+    self.vsdevcmd:send("cmake.exe --build build --target clean\n")
   end
-
-  self.vsdevcmd:send("cmake.exe --build build --target clean\n")
 end
 
 function M:cmake_run()
-  local build_dir = vim.loop.cwd() .. "/build/"
-  local executables = vim.fn.globpath(build_dir, "*.exe", false, true)
-  local targets = {}
-  for _, executable in ipairs(executables) do
-    local exe_name = vim.fn.fnamemodify(executable, ":t")
-    table.insert(targets, exe_name)
+  if self.vsdevcmd ~= nil then
+    local build_dir = vim.loop.cwd() .. "/build/"
+    local executables = vim.fn.globpath(build_dir, "*.exe", false, true)
+    local targets = {}
+    for _, executable in ipairs(executables) do
+      local exe_name = vim.fn.fnamemodify(executable, ":t")
+      table.insert(targets, exe_name)
+    end
+    if #targets == 0 then
+      vim.notify("No targets in the build directory", "warn", { title = M.name })
+      return
+    end
+    vim.ui.select(targets, {
+      prompt = "Please select a target to run",
+      format_item = function(item)
+        return "👉 " .. item
+      end,
+    }, function(choice)
+      local executable = build_dir .. "/" .. choice
+      Snacks.terminal("cmd /k " .. executable)
+    end)
   end
-  if #targets == 0 then
-    vim.notify("No targets in the build directory", "warn", { title = M.name })
-    return
+end
+
+function M:setup_background()
+  if M.is_win() then
+    M:setup_vsdevcmd()
+  else
+    -- TODO: Mac and Linux
   end
-  vim.ui.select(targets, {
-    prompt = "Please select a target to run",
-    format_item = function(item)
-      return "👉 " .. item
-    end,
-  }, function(choice)
-    local executable = build_dir .. "/" .. choice
-    Snacks.terminal("cmd /k " .. executable)
-  end)
 end
 
 return {
@@ -145,7 +155,12 @@ return {
     buildDirectory = "build",
   },
   on_init = function()
-    M:setup_vsdevcmd()
+    -- NOTE: 目前使用起来体感不是很好，不再使用
+    if true then
+      return
+    end
+
+    M:setup_background()
 
     local cmake_augroup = vim.api.nvim_create_augroup("CMakeAugroup", { clear = true })
     vim.api.nvim_create_autocmd("BufWritePost", {
