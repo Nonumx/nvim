@@ -275,3 +275,10 @@ later(function()
     },
   })
 end)
+
+-- [[ 配置测试 ]]
+later(function()
+  add({
+    source = "rafcamlet/nvim-luapad",
+  })
+end)
