@@ -100,6 +100,7 @@ now(function()
   add({ source = "echasnovski/mini.icons" })
   require("mini.icons").setup()
 end)
+
 -- [[ 状态栏 ]]
 now(function()
   add({ source = "echasnovski/mini.statusline" })
@@ -143,11 +144,13 @@ later(function()
   add({ source = "echasnovski/mini.pairs" })
   require("mini.pairs").setup()
 end)
+
 -- [[ 快速环绕 ]]
 later(function()
   add({ source = "echasnovski/mini.surround" })
   require("mini.surround").setup()
 end)
+
 -- [[ 快捷键提示 ]]
 later(function()
   add({ source = "folke/which-key.nvim" })
