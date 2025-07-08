@@ -240,6 +240,7 @@ later(function()
     formatters_by_ft = {
       lua = { "stylua" },
       cpp = { "clang-format" },
+      python = { "ruff" },
     },
   })
   vim.keymap.set("n", "<leader>cf", function()
