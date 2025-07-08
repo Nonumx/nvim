@@ -324,7 +324,32 @@ end)
 
 -- [[ 配置测试 ]]
 later(function()
-  add({
-    source = "rafcamlet/nvim-luapad",
+  add({ source = "rafcamlet/nvim-luapad" })
+end)
+
+-- [[ Markdown 渲染 ]]
+later(function()
+  add({ source = "OXY2DEV/markview.nvim" })
+  require("markview").setup({
+    preview = {
+      icon_provider = "mini",
+      filetypes = { "markdown", "codecompanion" },
+      ignore_buftypes = {},
+    },
+  })
+end)
+
+-- [[ AI Coding ]]
+later(function()
+  add({ source = "olimorris/codecompanion.nvim" })
+  require("codecompanion").setup({
+    strategies = {
+      chat = {
+        adapter = "deepseek",
+      },
+      inline = {
+        adapter = "deepseek",
+      },
+    },
   })
 end)
