@@ -104,7 +104,52 @@ end)
 -- [[ 状态栏 ]]
 now(function()
   add({ source = "echasnovski/mini.statusline" })
-  require("mini.statusline").setup()
+
+  local section_fileinfo = function(args)
+    local filetype = vim.bo.filetype
+
+    -- 类型图标
+    if filetype ~= "" then
+      filetype = MiniIcons.get("filetype", filetype) .. " " .. filetype
+    end
+
+    -- 小屏输出
+    if MiniStatusline.is_truncated(args.trunc_width) or vim.bo.buftype ~= "" then
+      return filetype
+    end
+
+    -- 文件编码
+    local encoding = vim.bo.fileencoding or vim.bo.encoding
+
+    return string.format("%s%s%s", filetype, filetype == "" and "" or " ", encoding)
+  end
+
+  local section_location = function()
+    -- 行号:列号
+    return "%l:%v"
+  end
+
+  require("mini.statusline").setup({
+    content = {
+      active = function()
+        local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
+        local git = MiniStatusline.section_git({ trunc_width = 40 })
+        local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
+        local lsp = MiniStatusline.section_lsp({ trunc_width = 75 })
+        local fileinfo = section_fileinfo({ trunc_width = 120 })
+        local location = section_location()
+
+        return MiniStatusline.combine_groups({
+          { hl = mode_hl, strings = { mode } },
+          { hl = "MiniStatuslineDevinfo", strings = { git, diagnostics, lsp } },
+          "%<", -- Mark general truncate point
+          "%=", -- End left alignment
+          { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
+          { hl = mode_hl, strings = { location } },
+        })
+      end,
+    },
+  })
 end)
 
 -- [[ snacks.nvim ]]
