@@ -275,6 +275,10 @@ later(function()
       "query",
       "vim",
       "vimdoc",
+      "json",
+      "jsonc",
+      "toml",
+      "yaml",
       "cpp",
       "python",
       "cmake",
@@ -342,7 +346,20 @@ end)
 -- [[ AI Coding ]]
 later(function()
   add({ source = "olimorris/codecompanion.nvim" })
+  local spinner = require("plugins.codecompanion.spinner")
+  spinner:init()
   require("codecompanion").setup({
+    adapters = {
+      deepseek = function()
+        return require("codecompanion.adapters").extend("deepseek", {
+          schema = {
+            model = {
+              default = "deepseek-chat",
+            },
+          },
+        })
+      end,
+    },
     strategies = {
       chat = {
         adapter = "deepseek",
@@ -350,6 +367,23 @@ later(function()
       inline = {
         adapter = "deepseek",
       },
+    },
+    display = {
+      chat = {
+        window = {
+          position = "right",
+          width = 0.3,
+        },
+      },
+    },
+    send = {
+      callback = function(chat)
+        vim.cmd("stopinsert")
+        chat:submit()
+        chat:add_buf_message({ role = "llm", content = "" })
+      end,
+      index = 1,
+      description = "Send",
     },
   })
 end)
