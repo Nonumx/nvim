@@ -1,9 +1,17 @@
 local path_package = vim.fn.stdpath("data") .. "/site/pack/deps/"
 local mini_deps_path = path_package .. "start/mini.deps"
-local snacks_path = path_package .. "opt/snacks.nvim"
-local plenary_path = path_package .. "opt/plenary.nvim"
-local mini_statusline_path = path_package .. "opt/mini.statusline"
-local mini_icons_path = path_package .. "opt/mini.icons"
+local plugins_path = vim.fn.globpath(path_package .. "opt/", "*/", false, true)
+
+local library = {
+  vim.env.VIMRUNTIME,
+  -- Depending on the usage, you might want to add additional paths
+  -- here.
+  --
+  "${3rd}/luv/library",
+  mini_deps_path,
+}
+
+library = vim.tbl_extend("keep", library, plugins_path)
 
 return {
   cmd = { "lua-language-server" },
@@ -43,18 +51,7 @@ return {
       -- Make the server aware of Neovim runtime files
       workspace = {
         checkThirdParty = false,
-        library = {
-          vim.env.VIMRUNTIME,
-          -- Depending on the usage, you might want to add additional paths
-          -- here.
-          --
-          "${3rd}/luv/library",
-          mini_deps_path,
-          snacks_path,
-          plenary_path,
-          mini_statusline_path,
-          mini_icons_path,
-        },
+        library = library,
         -- Or pull in all of 'runtimepath'.
         -- NOTE: this is a lot slower and will cause issues when working on
         -- your own configuration.
