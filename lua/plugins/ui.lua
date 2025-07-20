@@ -38,3 +38,7 @@ end, { desc = "Picker: Smart Find Files" })
 map("n", "<leader>/", function()
   Snacks.picker.grep()
 end, { desc = "Picker: Grep Workspace" })
+
+map("n", "<leader>g", function()
+  Snacks.lazygit()
+end, { desc = "lazygit" })

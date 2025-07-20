@@ -172,4 +172,10 @@ later(function()
       description = "Send",
     },
   })
+
+  local map = vim.keymap.set
+
+  map("n", "<leader>cc", function()
+    vim.cmd("CodeCompanionChat")
+  end, { desc = "CodeCompanion Chat" })
 end)
