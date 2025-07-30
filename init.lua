@@ -28,7 +28,7 @@ end)
 -- [[ 颜色主题 ]]
 now(function()
   add({ source = "rebelot/kanagawa.nvim" })
-  require("kanagawa")
+  require("kanagawa").setup({ transparent = true })
   vim.cmd("colorscheme kanagawa")
 end)
 
@@ -59,123 +59,14 @@ end)
 
 -- [[ 代码格式化 ]]
 later(function()
-  add({ source = "stevearc/conform.nvim" })
-  require("conform").setup({
-    notify_on_error = false,
-    format_on_save = {
-      timeout_ms = 500,
-    },
-    formatters_by_ft = {
-      lua = { "stylua" },
-      cpp = { "clang-format" },
-      python = { "ruff" },
-    },
-  })
-  vim.keymap.set("n", "<leader>cf", function()
-    require("conform").format({ async = true, lsp_format = "fallback" })
-  end, { desc = "Format buffer" })
+  require("plugins.formatting")
 end)
 
 -- [[ Treesitter配置 ]]
 later(function()
-  add({
-    source = "nvim-treesitter/nvim-treesitter",
-    -- Use 'master' while monitoring updates in 'main'
-    checkout = "master",
-    monitor = "main",
-    -- Perform action after every checkout
-    hooks = {
-      post_checkout = function()
-        vim.cmd("TSUpdate")
-      end,
-    },
-  })
-  ---@diagnostic disable-next-line: missing-fields
-  require("nvim-treesitter.configs").setup({
-    ensure_installed = {
-      "bash",
-      "c",
-      "diff",
-      "html",
-      "lua",
-      "luadoc",
-      "markdown",
-      "markdown_inline",
-      "query",
-      "vim",
-      "vimdoc",
-      "json",
-      "jsonc",
-      "toml",
-      "yaml",
-      "cpp",
-      "python",
-      "cmake",
-    },
-    highlight = { enable = true },
-    indent = { enable = true },
-  })
-end)
-
--- [[ Markdown 渲染 ]]
-later(function()
-  add({ source = "OXY2DEV/markview.nvim" })
-  require("markview").setup({
-    preview = {
-      icon_provider = "mini",
-      filetypes = { "markdown", "codecompanion" },
-      ignore_buftypes = {},
-    },
-  })
-end)
+  end)
 
 -- [[ AI Coding ]]
 later(function()
-  add({ source = "olimorris/codecompanion.nvim" })
-  local spinner = require("plugins.codecompanion.spinner")
-  spinner:init()
-  require("codecompanion").setup({
-    adapters = {
-      deepseek = function()
-        return require("codecompanion.adapters").extend("deepseek", {
-          schema = {
-            model = {
-              default = "deepseek-chat",
-            },
-          },
-        })
-      end,
-    },
-    strategies = {
-      chat = {
-        adapter = "deepseek",
-      },
-      inline = {
-        adapter = "deepseek",
-      },
-    },
-    display = {
-      chat = {
-        window = {
-          position = "right",
-          width = 0.3,
-        },
-      },
-    },
-    send = {
-      callback = function(chat)
-        vim.cmd("stopinsert")
-        chat:submit()
-        chat:add_buf_message({ role = "llm", content = "" })
-      end,
-      index = 1,
-      description = "Send",
-    },
-  })
-
-  local map = vim.keymap.set
-
-  map("n", "<leader>cc", function()
-    vim.cmd("CodeCompanionChat")
-  end, { desc = "CodeCompanion Chat" })
+  require("plugins.ai")
 end)
