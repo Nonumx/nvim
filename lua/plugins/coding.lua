@@ -7,7 +7,7 @@ add({ source = "echasnovski/mini.surround" })
 -- [[ 补全引擎 ]]
 add({
   source = "saghen/blink.cmp",
-  checkout = "v1.5.1",
+  checkout = "v1.6.0",
   depends = { "rafamadriz/friendly-snippets" },
 })
 
@@ -24,9 +24,6 @@ require("blink.cmp").setup({
   signature = { enabled = true },
   sources = {
     default = { "lsp", "path", "snippets", "buffer" },
-    per_filetype = {
-      codecompanion = { "codecompanion" },
-    },
   },
   completion = {
     documentation = {

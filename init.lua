@@ -27,19 +27,12 @@ end)
 
 -- [[ 颜色主题 ]]
 now(function()
-  add({ source = "rebelot/kanagawa.nvim" })
-  require("kanagawa").setup({ transparent = true })
-  vim.cmd("colorscheme kanagawa")
+  require("plugins.colorschema")
 end)
 
 -- [[ UI ]]
 now(function()
   require("plugins.ui")
-end)
-
--- [[ 通用库 ]]
-later(function()
-  add({ source = "nvim-lua/plenary.nvim" })
 end)
 
 -- [[ Editor ]]
@@ -64,9 +57,5 @@ end)
 
 -- [[ Treesitter配置 ]]
 later(function()
-  end)
-
--- [[ AI Coding ]]
-later(function()
-  require("plugins.ai")
+  require("plugins.treesitter")
 end)
