@@ -5,7 +5,6 @@ add({ source = "rebelot/heirline.nvim" })
 -- [[ 自定义UI ]]
 add({ source = "folke/noice.nvim", depends = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" } })
 
-require("mini.icons").setup()
 require("heirline").setup({})
 require("noice").setup({
   lsp = {
