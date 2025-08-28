@@ -30,6 +30,11 @@ now(function()
   require("plugins.colorschema")
 end)
 
+-- [[ Utils ]]
+now(function()
+  require("plugins.utils")
+end)
+
 -- [[ UI ]]
 now(function()
   require("plugins.ui")
@@ -38,6 +43,11 @@ end)
 -- [[ Editor ]]
 later(function()
   require("plugins.editor")
+end)
+
+-- [[ Telescope ]]
+later(function ()
+  require("plugins.telescope")
 end)
 
 -- [[ Coding ]]

@@ -35,3 +35,7 @@ o.shortmess = vim.tbl_deep_extend("force", vim.opt.shortmess:get(), { s = true, 
 o.writebackup = false -- 禁用文件覆盖时的备份功能
 o.completeopt = "menu,menuone,noselect" -- 调整补全菜单
 o.termguicolors = true -- 真彩显示
+
+-- 使用文件管理器插件
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1

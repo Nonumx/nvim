@@ -1,7 +1,5 @@
 local add = MiniDeps.add
 
--- [[ 图标库 ]]
-add({ source = "echasnovski/mini.icons" })
 -- [[ 状态栏、标签栏 ]]
 add({ source = "rebelot/heirline.nvim" })
 -- [[ 自定义UI ]]
