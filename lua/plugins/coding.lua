@@ -1,16 +1,3 @@
-local add = MiniDeps.add
-
--- [[ 自动配对 ]]
-add({ source = "echasnovski/mini.pairs" })
--- [[ 快速环绕 ]]
-add({ source = "echasnovski/mini.surround" })
--- [[ 补全引擎 ]]
-add({
-  source = "saghen/blink.cmp",
-  checkout = "v1.6.0",
-  depends = { "rafamadriz/friendly-snippets" },
-})
-
 require("mini.pairs").setup()
 require("mini.surround").setup()
 

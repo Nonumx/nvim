@@ -18,6 +18,78 @@ end
 require("mini.deps").setup({ path = { package = path_package } })
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
+-- [[ 安装插件 ]]
+now(function()
+  -- [[ 图标库 ]]
+  add({ source = "echasnovski/mini.icons" })
+  add({ source = "nvim-tree/nvim-web-devicons" })
+
+  -- [[ 通用库 ]]
+  add({ source = "nvim-lua/plenary.nvim" })
+
+  -- [[ 组件库 ]]
+  add({ source = "MunifTanjim/nui.nvim" })
+
+  -- [[ 通知组件 ]]
+  add({ source = "rcarriga/nvim-notify" })
+
+  -- [[ 颜色主题 ]]
+  add({ source = "everviolet/nvim", name = "evergarden" })
+
+  -- [[ 状态栏、标签栏 ]]
+  add({ source = "rebelot/heirline.nvim" })
+
+  -- [[ LSP管理器 ]]
+  add({ source = "mason-org/mason.nvim" })
+  add({ source = "mason-org/mason-lspconfig.nvim" })
+  add({ source = "neovim/nvim-lspconfig" })
+
+  -- [[ treesitter ]]
+  add({
+    source = "nvim-treesitter/nvim-treesitter",
+    -- Use 'master' while monitoring updates in 'main'
+    checkout = "master",
+    monitor = "main",
+    -- Perform action after every checkout
+    hooks = {
+      post_checkout = function()
+        vim.cmd("TSUpdate")
+      end,
+    },
+  })
+
+  -- [[ telescope ]]
+  add({
+    source = "nvim-telescope/telescope.nvim",
+    checkout = "0.1.8",
+    depends = { "nvim-telescope/telescope-fzf-native.nvim" },
+  })
+
+  -- [[ 格式化插件 ]]
+  add({ source = "stevearc/conform.nvim" })
+
+  -- [[ 快捷键提示 ]]
+  add({ source = "folke/which-key.nvim" })
+
+  -- [[ Git状态 ]]
+  add({ source = "lewis6991/gitsigns.nvim" })
+  -- [[ 自动保存 ]]
+  add({ source = "okuuva/auto-save.nvim" })
+  -- [[ 文件管理器 ]]
+  add({ source = "nvim-tree/nvim-tree.lua" })
+
+  -- [[ 自动配对 ]]
+  add({ source = "echasnovski/mini.pairs" })
+  -- [[ 快速环绕 ]]
+  add({ source = "echasnovski/mini.surround" })
+  -- [[ 补全引擎 ]]
+  add({
+    source = "saghen/blink.cmp",
+    checkout = "v1.6.0",
+    depends = { "rafamadriz/friendly-snippets" },
+  })
+end)
+
 -- [[ 基本配置 ]]
 now(function()
   require("config.options")
@@ -46,7 +118,7 @@ later(function()
 end)
 
 -- [[ Telescope ]]
-later(function ()
+later(function()
   require("plugins.telescope")
 end)
 

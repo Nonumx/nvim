@@ -1,11 +1,11 @@
-local add = MiniDeps.add
-
--- [[ 图标库 ]]
-add({ source = "echasnovski/mini.icons" })
-add({ source = "nvim-tree/nvim-web-devicons" })
-
--- [[ 通用库 ]]
-add({ source = "nvim-lua/plenary.nvim" })
-
 require("mini.icons").setup()
 require("nvim-web-devicons").setup()
+
+require("notify").setup({
+  render = "wrapped-default",
+  stages = "fade",
+  merge_duplicates = true,
+  minimum_width = 20,
+  max_width = 50,
+})
+vim.notify = require("notify")

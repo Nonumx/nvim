@@ -1,10 +1,3 @@
-local add = MiniDeps.add
-
--- [[ LSP管理器 ]]
-add({ source = "mason-org/mason.nvim" })
-add({ source = "mason-org/mason-lspconfig.nvim" })
-add({ source = "neovim/nvim-lspconfig" })
-
 require("mason").setup({
   ui = {
     icons = {
@@ -16,6 +9,22 @@ require("mason").setup({
 })
 
 require("mason-lspconfig").setup({})
+
+local ensured_installed_pkg = {
+  "lua-language-server",
+  "stylua",
+}
+
+local registry = require("mason-registry")
+
+for _, pkg_name in ipairs(ensured_installed_pkg) do
+  local ok, pkg = pcall(registry.get_package, pkg_name)
+  if ok then
+    if not pkg:is_installed() then
+      pkg:install()
+    end
+  end
+end
 
 local path_package = vim.fn.stdpath("data") .. "/site/pack/deps/"
 local mini_deps_path = path_package .. "start/mini.deps"

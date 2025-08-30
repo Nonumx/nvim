@@ -1,18 +1,3 @@
-local add = MiniDeps.add
-
-add({
-  source = "nvim-treesitter/nvim-treesitter",
-  -- Use 'master' while monitoring updates in 'main'
-  checkout = "master",
-  monitor = "main",
-  -- Perform action after every checkout
-  hooks = {
-    post_checkout = function()
-      vim.cmd("TSUpdate")
-    end,
-  },
-})
-
 ---@diagnostic disable-next-line: missing-fields
 require("nvim-treesitter.configs").setup({
   ensure_installed = {
@@ -42,7 +27,7 @@ require("nvim-treesitter.configs").setup({
     "javascript",
     "typescript",
     "tsx",
-    "vue"
+    "vue",
   },
   highlight = { enable = true },
   indent = { enable = true },
