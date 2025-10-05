@@ -29,9 +29,6 @@ add({ source = "nvim-mini/mini.icons" })
 require("mini.icons").setup({})
 require("mini.icons").mock_nvim_web_devicons()
 
--- 通用库
-add({ source = "nvim-lua/plenary.nvim" })
-
 -- [[ 基本配置 ]]
 now(function()
   require("config.options")
@@ -48,14 +45,14 @@ now(function()
   require("plugins.ui")
 end)
 
+-- snacks.nvim
+later(function()
+  require("plugins.snacks")
+end)
+
 -- [[ 编辑器 ]]
 later(function()
   require("plugins.editor")
-end)
-
--- [[ Telescope ]]
-later(function()
-  require("plugins.telescope")
 end)
 
 -- [[ 编码 ]]

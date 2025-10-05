@@ -19,8 +19,3 @@ require("auto-save").setup({
     cancel_deferred_save = {},
   }, -- 禁用延迟保存的功能
 })
-
--- 文件管理器
-add({ source = "nvim-tree/nvim-tree.lua" })
-require("nvim-tree").setup()
-vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "nvim-tree: toggle" })

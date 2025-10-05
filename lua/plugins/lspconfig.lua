@@ -3,9 +3,6 @@ local add = MiniDeps.add
 -- 只读仓库：mason-lspconfig会用这里面的默认配置
 add({ source = "neovim/nvim-lspconfig" })
 
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "[LSP] Goto Definition" })
-vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "[LSP] Goto Declaration" })
-
 -- LSP管理器
 add({ source = "mason-org/mason.nvim" })
 require("mason").setup({
