@@ -22,8 +22,4 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
 -- quit
-map("n", "<leader>qq", "<cmd>qa<cr>", { desc = "Quit All" })
-
--- LSP快捷键
-map("n", "gd", vim.lsp.buf.definition, { desc = "Goto Definition" })
-map("n", "gD", vim.lsp.buf.declaration, { desc = "Goto Declaration" })
+map({ "n" }, "<leader>q", "<cmd>qa<cr>", { desc = "Quit" })

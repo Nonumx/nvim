@@ -18,83 +18,24 @@ end
 require("mini.deps").setup({ path = { package = path_package } })
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
--- [[ 安装插件 ]]
-now(function()
-  -- [[ 图标库 ]]
-  add({ source = "echasnovski/mini.icons" })
-  add({ source = "nvim-tree/nvim-web-devicons" })
+-- 安装通知插件
+-- 先安装这个，后面安装插件就有回显
+add({ source = "nvim-mini/mini.notify" })
+require("mini.notify").setup({})
+vim.notify = require("mini.notify").make_notify()
 
-  -- [[ 通用库 ]]
-  add({ source = "nvim-lua/plenary.nvim" })
+-- 图标库
+add({ source = "nvim-mini/mini.icons" })
+require("mini.icons").setup({})
+require("mini.icons").mock_nvim_web_devicons()
 
-  -- [[ 组件库 ]]
-  add({ source = "MunifTanjim/nui.nvim" })
-
-  -- [[ 通知组件 ]]
-  add({ source = "rcarriga/nvim-notify" })
-
-  -- [[ 颜色主题 ]]
-  add({ source = "everviolet/nvim", name = "evergarden" })
-
-  -- [[ 状态栏、标签栏 ]]
-  add({ source = "rebelot/heirline.nvim" })
-
-  -- [[ LSP管理器 ]]
-  add({ source = "mason-org/mason.nvim" })
-  add({ source = "mason-org/mason-lspconfig.nvim" })
-  add({ source = "neovim/nvim-lspconfig" })
-
-  -- [[ treesitter ]]
-  add({
-    source = "nvim-treesitter/nvim-treesitter",
-    -- Use 'master' while monitoring updates in 'main'
-    checkout = "master",
-    monitor = "main",
-    -- Perform action after every checkout
-    hooks = {
-      post_checkout = function()
-        vim.cmd("TSUpdate")
-      end,
-    },
-  })
-
-  -- [[ telescope ]]
-  add({
-    source = "nvim-telescope/telescope.nvim",
-    checkout = "0.1.8",
-    depends = { "nvim-telescope/telescope-fzf-native.nvim" },
-  })
-
-  -- [[ 格式化插件 ]]
-  add({ source = "stevearc/conform.nvim" })
-
-  -- [[ 快捷键提示 ]]
-  add({ source = "folke/which-key.nvim" })
-
-  -- [[ Git状态 ]]
-  add({ source = "lewis6991/gitsigns.nvim" })
-  -- [[ 自动保存 ]]
-  add({ source = "okuuva/auto-save.nvim" })
-  -- [[ 文件管理器 ]]
-  add({ source = "nvim-tree/nvim-tree.lua" })
-
-  -- [[ 自动配对 ]]
-  add({ source = "echasnovski/mini.pairs" })
-  -- [[ 快速环绕 ]]
-  add({ source = "echasnovski/mini.surround" })
-  -- [[ 补全引擎 ]]
-  add({
-    source = "saghen/blink.cmp",
-    checkout = "v1.6.0",
-    depends = { "rafamadriz/friendly-snippets" },
-  })
-end)
+-- 通用库
+add({ source = "nvim-lua/plenary.nvim" })
 
 -- [[ 基本配置 ]]
 now(function()
   require("config.options")
   require("config.keymaps")
-  require("config.autocmds")
 end)
 
 -- [[ 颜色主题 ]]
@@ -102,17 +43,12 @@ now(function()
   require("plugins.colorschema")
 end)
 
--- [[ Utils ]]
-now(function()
-  require("plugins.utils")
-end)
-
--- [[ UI ]]
+-- [[ 界面 ]]
 now(function()
   require("plugins.ui")
 end)
 
--- [[ Editor ]]
+-- [[ 编辑器 ]]
 later(function()
   require("plugins.editor")
 end)
@@ -122,7 +58,7 @@ later(function()
   require("plugins.telescope")
 end)
 
--- [[ Coding ]]
+-- [[ 编码 ]]
 later(function()
   require("plugins.coding")
 end)

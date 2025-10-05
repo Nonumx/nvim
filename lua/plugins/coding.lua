@@ -1,6 +1,19 @@
+local add = MiniDeps.add
+
+-- [[ 自动配对 ]]
+add({ source = "echasnovski/mini.pairs" })
 require("mini.pairs").setup()
+
+-- [[ 快速环绕 ]]
+add({ source = "echasnovski/mini.surround" })
 require("mini.surround").setup()
 
+-- [[ 补全引擎 ]]
+add({
+  source = "saghen/blink.cmp",
+  checkout = "v1.6.0",
+  depends = { "rafamadriz/friendly-snippets" },
+})
 require("blink.cmp").setup({
   keymap = {
     preset = "super-tab",
