@@ -1,21 +1,22 @@
-local add = MiniDeps.add
+local add, later = MiniDeps.add, MiniDeps.later
 
 -- 快捷键提示
-add({ source = "folke/which-key.nvim" })
-require("which-key").setup({ preset = "helix" })
-vim.keymap.set("n", "<leader>?", function()
-  require("which-key").show({ global = false })
-end, { desc = "Buffer Local Keymaps (which-key)" })
+later(function()
+  add({ source = "folke/which-key.nvim" })
+  require("which-key").setup({ preset = "helix" })
+  vim.keymap.set("n", "<leader>?", function()
+    require("which-key").show({ global = false })
+  end, { desc = "Buffer Local Keymaps (which-key)" })
+end)
 
 -- Git状态
-add({ source = "lewis6991/gitsigns.nvim" })
-require("gitsigns").setup({ trouble = true })
+later(function()
+  add({ source = "lewis6991/gitsigns.nvim" })
+  require("gitsigns").setup({ trouble = true })
+end)
 
--- 自动保存
-add({ source = "okuuva/auto-save.nvim" })
-require("auto-save").setup({
-  trigger_events = {
-    defer_save = {},
-    cancel_deferred_save = {},
-  }, -- 禁用延迟保存的功能
-})
+-- 进度条显示
+later(function()
+  add({ source = "j-hui/fidget.nvim" })
+  require("fidget").setup({})
+end)

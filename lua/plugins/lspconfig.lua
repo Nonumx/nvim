@@ -1,38 +1,40 @@
-local add = MiniDeps.add
+local add, later = MiniDeps.add, MiniDeps.later
 
--- 只读仓库：mason-lspconfig会用这里面的默认配置
-add({ source = "neovim/nvim-lspconfig" })
+later(function()
+  -- 只读仓库：mason-lspconfig会用这里面的默认配置
+  add({ source = "neovim/nvim-lspconfig" })
 
--- LSP管理器
-add({ source = "mason-org/mason.nvim" })
-require("mason").setup({
-  ui = {
-    icons = {
-      package_pending = " ",
-      package_installed = " ",
-      package_uninstalled = " ",
+  -- LSP管理器
+  add({ source = "mason-org/mason.nvim" })
+  require("mason").setup({
+    ui = {
+      icons = {
+        package_pending = " ",
+        package_installed = " ",
+        package_uninstalled = " ",
+      },
     },
-  },
-})
+  })
 
--- LSP自动配置
-add({ source = "mason-org/mason-lspconfig.nvim" })
-require("mason-lspconfig").setup({})
+  -- LSP自动配置
+  add({ source = "mason-org/mason-lspconfig.nvim" })
+  require("mason-lspconfig").setup({})
 
-local ensured_installed_pkg = {
-  "lua-language-server",
-  "stylua",
-  "basedpyright",
-  "ruff",
-}
+  local ensured_installed_pkg = {
+    "lua-language-server",
+    "stylua",
+    "basedpyright",
+    "ruff",
+  }
 
-local registry = require("mason-registry")
+  local registry = require("mason-registry")
 
-for _, pkg_name in ipairs(ensured_installed_pkg) do
-  local ok, pkg = pcall(registry.get_package, pkg_name)
-  if ok then
-    if not pkg:is_installed() then
-      pkg:install()
+  for _, pkg_name in ipairs(ensured_installed_pkg) do
+    local ok, pkg = pcall(registry.get_package, pkg_name)
+    if ok then
+      if not pkg:is_installed() then
+        pkg:install()
+      end
     end
   end
-end
+end)

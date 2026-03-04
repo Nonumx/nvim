@@ -19,7 +19,7 @@ map("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 map("n", ";", ":", { desc = "CMD enter command mode" })
 
 -- 保存文件
-map({ "i", "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+map({ "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
 -- quit
 map({ "n" }, "<leader>q", "<cmd>qa<cr>", { desc = "Quit" })
