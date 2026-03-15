@@ -62,10 +62,8 @@ later(function()
     opts = {
       library = {
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-        { path = "snacks.nvim", words = { "Snacks" } },
         { path = "mini.deps", words = { "MiniDeps" } },
       },
     },
   })
 end)
-

@@ -20,3 +20,44 @@ later(function()
   add({ source = "j-hui/fidget.nvim" })
   require("fidget").setup({})
 end)
+
+-- 文件资源管理器
+later(function()
+  add({ source = "nvim-tree/nvim-tree.lua" })
+
+  vim.g.loaded_netrw = 1
+  vim.g.loaded_netrwPlugin = 1
+
+  require("nvim-tree").setup({
+    filters = {
+      dotfiles = false,
+    },
+  })
+
+  vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "File Explorer" })
+end)
+
+-- 代码缩进
+later(function()
+  add({ source = "saghen/blink.indent" })
+  require("blink.indent").setup({})
+end)
+
+-- Telescope
+later(function()
+  add({
+    source = "nvim-telescope/telescope.nvim",
+    depends = {
+      "nvim-lua/plenary.nvim",
+      {
+        source = "nvim-telescope/telescope-fzf-native.nvim",
+        hooks = {
+          post_checkout = function()
+            vim.cmd("make")
+          end,
+        },
+      },
+    },
+  })
+  require("telescope").setup({})
+end)
