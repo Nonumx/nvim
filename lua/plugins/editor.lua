@@ -4,6 +4,14 @@ local add, later = MiniDeps.add, MiniDeps.later
 later(function()
   add({ source = "folke/which-key.nvim" })
   require("which-key").setup({ preset = "helix" })
+
+  local wk = require("which-key")
+  wk.add({
+    { "<leader>c", group = "code" },
+    { "<leader>f", group = "find" },
+    { "<leader>s", group = "search" },
+  })
+
   vim.keymap.set("n", "<leader>?", function()
     require("which-key").show({ global = false })
   end, { desc = "Buffer Local Keymaps (which-key)" })
@@ -28,13 +36,43 @@ later(function()
   vim.g.loaded_netrw = 1
   vim.g.loaded_netrwPlugin = 1
 
+  local function nvim_tree_on_attach(bufnr)
+    local api = require("nvim-tree.api")
+    local function opts(desc)
+      return {
+        desc = "nvim-tree: " .. desc,
+        buffer = bufnr,
+        noremap = true,
+        silent = true,
+        nowait = true,
+      }
+    end
+
+    api.map.on_attach.default(bufnr)
+
+    local function edit_or_open()
+      local node = api.tree.get_node_under_cursor()
+      if node.type == "directory" then
+        -- 目录：展开/收起
+        api.node.open.edit()
+      else
+        -- 文件：打开，并把焦点交给文件窗口
+        api.node.open.edit()
+      end
+    end
+
+    vim.keymap.set("n", "h", api.node.navigate.parent_close, opts("Close Directory"))
+    vim.keymap.set("n", "l", edit_or_open, opts("Open Or Expand"))
+  end
+
   require("nvim-tree").setup({
     filters = {
       dotfiles = false,
     },
+    on_attach = nvim_tree_on_attach,
   })
 
-  vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeToggle<cr>", { desc = "File Explorer" })
+  vim.keymap.set("n", "<leader>e", "<cmd>NvimTreeFocus<cr>", { desc = "File Explorer" })
 end)
 
 -- 代码缩进
@@ -60,4 +98,9 @@ later(function()
     },
   })
   require("telescope").setup({})
+
+  local builtin = require("telescope.builtin")
+  vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find Files" })
+  vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live Grep" })
+  vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help Tags" })
 end)
