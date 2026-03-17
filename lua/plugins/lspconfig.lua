@@ -3,9 +3,11 @@ local add, later = MiniDeps.add, MiniDeps.later
 later(function()
   -- 只读仓库：mason-lspconfig会用这里面的默认配置
   add({ source = "neovim/nvim-lspconfig" })
-
   -- LSP管理器
   add({ source = "mason-org/mason.nvim" })
+  -- LSP自动配置
+  add({ source = "mason-org/mason-lspconfig.nvim" })
+
   require("mason").setup({
     ui = {
       icons = {
@@ -16,25 +18,32 @@ later(function()
     },
   })
 
-  -- LSP自动配置
-  add({ source = "mason-org/mason-lspconfig.nvim" })
   require("mason-lspconfig").setup({})
 
-  local ensured_installed_pkg = {
-    "lua-language-server",
-    "stylua",
-    "basedpyright",
-    "ruff",
-  }
+  local config = require("plugins.lang"):get_config()
 
   local registry = require("mason-registry")
+
+  local ensured_installed_pkg = {}
+
+  -- 将所有的工具列表合并到 ensured_installed_pkg 中
+  for _, tools in pairs(config.mason) do
+    vim.list_extend(ensured_installed_pkg, tools)
+  end
 
   for _, pkg_name in ipairs(ensured_installed_pkg) do
     local ok, pkg = pcall(registry.get_package, pkg_name)
     if ok then
       if not pkg:is_installed() then
+        vim.notify("[mason] Installing " .. pkg_name)
         pkg:install()
       end
     end
+  end
+
+  vim.notify(vim.inspect(config.lspconfig))
+  for name, cfg in pairs(config.lspconfig) do
+    vim.notify(vim.inspect(cfg))
+    vim.lsp.config(name, cfg)
   end
 end)
