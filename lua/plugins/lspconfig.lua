@@ -41,9 +41,7 @@ later(function()
     end
   end
 
-  vim.notify(vim.inspect(config.lspconfig))
   for name, cfg in pairs(config.lspconfig) do
-    vim.notify(vim.inspect(cfg))
     vim.lsp.config(name, cfg)
   end
 end)
