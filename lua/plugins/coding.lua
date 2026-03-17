@@ -73,3 +73,19 @@ later(function()
   add({ source = "nmac427/guess-indent.nvim" })
   require("guess-indent").setup({})
 end)
+
+-- Code Action
+later(function()
+  add({
+    source = "rachartier/tiny-code-action.nvim",
+    depends = {
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim",
+    },
+  })
+
+  local plugin = require("tiny-code-action")
+  plugin.setup({})
+
+  vim.keymap.set({ "n", "x" }, "<leader>ca", plugin.code_action, { noremap = true, silent = true })
+end)

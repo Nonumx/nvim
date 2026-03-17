@@ -100,9 +100,12 @@ later(function()
   require("telescope").setup({})
 
   local builtin = require("telescope.builtin")
+
   vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find Files" })
   vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live Grep" })
   vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help Tags" })
+
+  vim.keymap.set("n", "gd", builtin.lsp_definitions, { desc = "Goto Definitions" })
 end)
 
 -- 任务运行
