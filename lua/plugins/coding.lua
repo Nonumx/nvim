@@ -67,3 +67,9 @@ later(function()
     },
   })
 end)
+
+-- 根据文本判断 tab 缩进
+later(function()
+  add({ source = "nmac427/guess-indent.nvim" })
+  require("guess-indent").setup({})
+end)
