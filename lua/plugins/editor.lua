@@ -68,6 +68,8 @@ later(function()
   require("nvim-tree").setup({
     filters = {
       dotfiles = false,
+      git_ignored = false,
+      custom = { "^.git$" }
     },
     on_attach = nvim_tree_on_attach,
   })
