@@ -110,3 +110,16 @@ later(function()
   add({ source = "stevearc/overseer.nvim" })
   require("overseer").setup()
 end)
+
+-- 自动保存
+later(function()
+  add({ source = "okuuva/auto-save.nvim" })
+  require("auto-save").setup({
+    -- 离开 buffer 或失去焦点时保存
+    trigger_events = {
+      immediate_save = { "BufLeave", "FocusLost" },
+      defer_save = {},
+      cancel_deferred_save = {},
+    },
+  })
+end)
