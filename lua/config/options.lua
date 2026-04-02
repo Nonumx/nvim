@@ -8,6 +8,7 @@ local o = vim.opt
 -- 行号
 o.number = true
 o.relativenumber = true
+o.signcolumn = "yes" -- 始终显示左侧标记列，避免 LSP 诊断出现时窗口跳动
 
 -- 状态栏
 o.laststatus = 3 -- 只使用一个状态栏

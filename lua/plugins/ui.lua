@@ -13,7 +13,14 @@ end)
 -- 图标库
 now(function()
   add({ source = "nvim-mini/mini.icons" })
-  require("mini.icons").setup({})
+  require("mini.icons").setup({
+    lsp = {
+      error = { glyph = "󰅚" },
+      warn  = { glyph = "󰀪" },
+      info  = { glyph = "󰋽" },
+      hint  = { glyph = "󰌶" },
+    },
+  })
   require("mini.icons").mock_nvim_web_devicons()
 end)
 

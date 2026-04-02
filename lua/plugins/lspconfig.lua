@@ -41,6 +41,17 @@ later(function()
     end
   end
 
+  vim.diagnostic.config({
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = MiniIcons.get("lsp", "error"),
+        [vim.diagnostic.severity.WARN]  = MiniIcons.get("lsp", "warn"),
+        [vim.diagnostic.severity.INFO]  = MiniIcons.get("lsp", "info"),
+        [vim.diagnostic.severity.HINT]  = MiniIcons.get("lsp", "hint"),
+      },
+    },
+  })
+
   for name, cfg in pairs(config.lspconfig) do
     vim.lsp.config(name, cfg)
   end
