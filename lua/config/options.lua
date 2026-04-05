@@ -19,7 +19,6 @@ o.showmode = false -- 不在命令行中显示编辑模式
 o.tabstop = 2 -- 默认两个空格
 o.shiftwidth = 2 -- 自动缩进宽度
 o.expandtab = true -- 使用空格而不是制表符
-o.smartindent = true -- 智能缩进
 o.autoindent = true -- 保持缩进
 
 -- 搜索时智能判断大小写

@@ -69,7 +69,7 @@ later(function()
     filters = {
       dotfiles = false,
       git_ignored = false,
-      custom = { "^.git$" }
+      custom = { "^.git$" },
     },
     on_attach = nvim_tree_on_attach,
   })
@@ -107,7 +107,7 @@ later(function()
   vim.keymap.set("n", "<leader>fg", builtin.live_grep, { desc = "Live Grep" })
   vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help Tags" })
 
-  vim.keymap.set("n", "gd", builtin.lsp_definitions, { desc = "Goto Definitions" })
+  vim.keymap.set("n", "gd", builtin.lsp_definitions, { desc = "[LSP] Goto Definitions" })
 end)
 
 -- 任务运行
@@ -130,15 +130,15 @@ later(function()
 end)
 
 -- Lazygit集成
-later(function ()
+later(function()
   add({ source = "kdheepak/lazygit.nvim", depends = {
-    "nvim-lua/plenary.nvim"
+    "nvim-lua/plenary.nvim",
   } })
   vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "Toggle Lazygit" })
 end)
 
 -- 单词高亮
-later(function ()
+later(function()
   add({ source = "nvim-mini/mini.cursorword" })
   require("mini.cursorword").setup()
 end)

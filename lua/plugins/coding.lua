@@ -86,7 +86,7 @@ later(function()
 
   local plugin = require("tiny-code-action")
   plugin.setup({
-    backend = "delta"
+    backend = "delta",
   })
 
   vim.keymap.set({ "n", "x" }, "<leader>ca", plugin.code_action, { noremap = true, silent = true })
