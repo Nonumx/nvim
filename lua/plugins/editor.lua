@@ -128,3 +128,10 @@ later(function()
     },
   })
 end)
+
+later(function ()
+  add({ source = "kdheepak/lazygit.nvim", depends = {
+    "nvim-lua/plenary.nvim"
+  } })
+  vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
+end)
