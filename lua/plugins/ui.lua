@@ -16,9 +16,9 @@ now(function()
   require("mini.icons").setup({
     lsp = {
       error = { glyph = "󰅚" },
-      warn  = { glyph = "󰀪" },
-      info  = { glyph = "󰋽" },
-      hint  = { glyph = "󰌶" },
+      warn = { glyph = "󰀪" },
+      info = { glyph = "󰋽" },
+      hint = { glyph = "󰌶" },
     },
   })
   require("mini.icons").mock_nvim_web_devicons()
@@ -43,6 +43,16 @@ now(function()
         color = "surface0",
       },
     },
+    overrides = function(colors)
+      return {
+        MiniCursorword = {
+          bg = colors.surface1, -- 比 surface0 更明显的背景
+        },
+        MiniCursorwordCurrent = {
+          bg = colors.surface2, -- 当前单词用更亮的背景
+        },
+      }
+    end,
   })
   vim.cmd("colorscheme evergarden")
 end)

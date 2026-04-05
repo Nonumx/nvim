@@ -129,9 +129,16 @@ later(function()
   })
 end)
 
+-- Lazygit集成
 later(function ()
   add({ source = "kdheepak/lazygit.nvim", depends = {
     "nvim-lua/plenary.nvim"
   } })
-  vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "LazyGit" })
+  vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "Toggle Lazygit" })
+end)
+
+-- 单词高亮
+later(function ()
+  add({ source = "nvim-mini/mini.cursorword" })
+  require("mini.cursorword").setup()
 end)
