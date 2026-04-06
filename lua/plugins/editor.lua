@@ -116,13 +116,6 @@ later(function()
   vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help Tags" })
 
   vim.keymap.set("n", "gd", builtin.lsp_definitions, { desc = "[LSP] Goto Definitions" })
-
-  vim.api.nvim_create_autocmd("FileType", {
-    pattern = "mason",
-    callback = function()
-      vim.keymap.set("n", "<C-f>", builtin.live_grep({ buffer = true }))
-    end,
-  })
 end)
 
 -- 任务运行
