@@ -23,7 +23,7 @@ function M:get_config()
   end
 
   -- 加载并合并各语言配置
-  local langs = { "cpp", "python" }
+  local langs = { "cpp", "python", "rust" }
   for _, lang in ipairs(langs) do
     local ok, cfg = pcall(require, "plugins.lang." .. lang)
     if ok and type(cfg) == "table" then
