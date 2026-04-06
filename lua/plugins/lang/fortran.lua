@@ -1,6 +1,6 @@
 return {
   mason = {
-    lsp = { "rust-analyzer" },
+    lsp = { "fortls" },
     dap = {},
     linter = {},
     formatter = {},
@@ -8,7 +8,7 @@ return {
 
   conform = {
     formatters_by_ft = {
-      rust = { "rust-analyzer" },
+      fortran = {},
     },
   },
 
