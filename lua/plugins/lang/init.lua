@@ -8,6 +8,7 @@ M.config = {
     formatter = { "stylua" },
   },
   lspconfig = {},
+  setup = {},
   conform = {
     formatters_by_ft = {
       lua = { "stylua" },
@@ -38,9 +39,13 @@ function M:get_config()
         self.config.conform.formatters_by_ft =
           vim.tbl_extend("force", self.config.conform.formatters_by_ft, cfg.conform.formatters_by_ft)
       end
-      -- 合并 lspconfig
+      -- 合并 lspconfig 配置
       if cfg.lspconfig then
         self.config.lspconfig = vim.tbl_extend("force", self.config.lspconfig, cfg.lspconfig)
+      end
+      -- 合并 setup 配置
+      if cfg.setup and type(cfg.setup) == "function" then
+        table.insert(self.config.setup, cfg.setup)
       end
     end
   end

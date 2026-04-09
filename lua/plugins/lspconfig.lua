@@ -55,4 +55,8 @@ later(function()
   for name, cfg in pairs(config.lspconfig) do
     vim.lsp.config(name, cfg)
   end
+
+  for _, setup in ipairs(config.setup) do
+    setup()
+  end
 end)
