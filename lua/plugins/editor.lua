@@ -152,3 +152,9 @@ later(function()
   add({ source = "nvim-mini/mini.cursorword" })
   require("mini.cursorword").setup()
 end)
+
+-- 丝滑滚动
+later(function()
+  add({ source = "karb94/neoscroll.nvim" })
+  require("neoscroll").setup({})
+end)
