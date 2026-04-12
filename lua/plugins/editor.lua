@@ -113,9 +113,9 @@ later(function()
 
   local builtin = require("telescope.builtin")
 
-  vim.keymap.set("n", "<leader><space>", builtin.find_files, { desc = "Find Files" })
-  vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Live Grep" })
-  vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help Tags" })
+  vim.keymap.set("n", "<leader><space>", builtin.find_files, { desc = "Find Files", silent = true })
+  vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Live Grep", silent = true })
+  vim.keymap.set("n", "<leader>fh", builtin.help_tags, { desc = "Help Tags", silent = true })
 
   vim.keymap.set("n", "gd", builtin.lsp_definitions, { desc = "LSP: Goto Definitions" })
 end)
@@ -144,7 +144,7 @@ later(function()
   add({ source = "kdheepak/lazygit.nvim", depends = {
     "nvim-lua/plenary.nvim",
   } })
-  vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "Toggle Lazygit" })
+  vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "Toggle Lazygit", silent = true })
 end)
 
 -- 单词高亮
