@@ -19,6 +19,7 @@ require("mini.deps").setup({ path = { package = path_package } })
 
 require("config.options")
 require("config.keymaps")
+require("plugins.colorscheme")
 require("plugins.ui")
 require("plugins.editor")
 require("plugins.lspconfig")
