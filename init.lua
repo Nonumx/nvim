@@ -25,4 +25,3 @@ require("plugins.editor")
 require("plugins.lspconfig")
 require("plugins.coding")
 require("plugins.formatting")
-

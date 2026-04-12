@@ -20,6 +20,7 @@ map("n", ";", ":", { desc = "CMD enter command mode" })
 
 -- 保存文件
 map({ "x", "n", "s" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
+map({ "i" }, "<C-s>", "<cmd>w<cr><esc>", { desc = "Save File" })
 
 -- quit
 map({ "n" }, "<leader>q", "<cmd>qa<cr>", { desc = "Quit" })

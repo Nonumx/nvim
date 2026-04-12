@@ -8,6 +8,10 @@ later(function()
   require("conform").setup({
     notify_on_error = false,
     formatters_by_ft = config.conform.formatters_by_ft,
+    format_on_save = {
+      timeout_ms = 500,
+      lsp_format = "fallback",
+    },
   })
 
   vim.keymap.set("n", "<leader>cf", function()
