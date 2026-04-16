@@ -1,93 +1,41 @@
-local add, later = MiniDeps.add, MiniDeps.later
-
 -- 自动配对
-later(function()
-  add({ source = "echasnovski/mini.pairs" })
-  require("mini.pairs").setup()
-end)
-
--- 词组括号
-later(function()
-  add({ source = "echasnovski/mini.surround" })
-  require("mini.surround").setup()
-end)
+require("mini.pairs").setup()
 
 -- 补全引擎
-later(function()
-  add({
-    source = "saghen/blink.cmp",
-    checkout = "v1.6.0",
-    depends = { "rafamadriz/friendly-snippets" },
-  })
-  require("blink.cmp").setup({
-    keymap = {
-      preset = "super-tab",
+require("blink.cmp").setup({
+  keymap = {
+    preset = "super-tab",
+  },
+  appearance = {
+    nerd_font_variant = "normal",
+  },
+  signature = { enabled = true },
+  sources = {
+    default = { "lsp", "path", "snippets", "buffer" },
+  },
+  completion = {
+    documentation = {
+      auto_show = true,
+      auto_show_delay_ms = 300,
     },
-    appearance = {
-      nerd_font_variant = "normal",
-    },
-    signature = { enabled = true },
-    sources = {
-      default = { "lazydev", "lsp", "path", "snippets", "buffer" },
-      providers = {
-        lazydev = {
-          name = "LazyDev",
-          module = "lazydev.integrations.blink",
-          -- make lazydev completions top priority (see `:h blink.cmp`)
-          score_offset = 100,
+    menu = {
+      draw = {
+        columns = {
+          { "kind_icon", "label" },
+          { "kind" },
         },
       },
     },
-    completion = {
-      documentation = {
-        auto_show = true,
-        auto_show_delay_ms = 300,
-      },
-      menu = {
-        draw = {
-          columns = {
-            { "kind_icon", "label" },
-            { "kind" },
-          },
-        },
-      },
-    },
-  })
-end)
-
--- Neovim配置开发
-later(function()
-  add({ source = "folke/lazydev.nvim" })
-  require("lazydev").setup({
-    opts = {
-      library = {
-        { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-        { path = "mini.deps", words = { "MiniDeps" } },
-      },
-    },
-  })
-end)
+  },
+})
 
 -- 根据文本判断 tab 缩进
-later(function()
-  add({ source = "nmac427/guess-indent.nvim" })
-  require("guess-indent").setup({})
-end)
+require("guess-indent").setup({})
 
 -- Code Action
-later(function()
-  add({
-    source = "rachartier/tiny-code-action.nvim",
-    depends = {
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-  })
+local tiny_ca = require("tiny-code-action")
+tiny_ca.setup({
+  backend = "delta",
+})
 
-  local plugin = require("tiny-code-action")
-  plugin.setup({
-    backend = "delta",
-  })
-
-  vim.keymap.set({ "n", "x" }, "<leader>ca", plugin.code_action, { noremap = true, silent = true })
-end)
+vim.keymap.set({ "n", "x" }, "<leader>ca", tiny_ca.code_action, { noremap = true, silent = true, desc = "Code Action" })

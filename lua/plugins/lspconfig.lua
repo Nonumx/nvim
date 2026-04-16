@@ -1,62 +1,53 @@
-local add, later = MiniDeps.add, MiniDeps.later
-
-later(function()
-  -- 只读仓库：mason-lspconfig会用这里面的默认配置
-  add({ source = "neovim/nvim-lspconfig" })
-  -- LSP管理器
-  add({ source = "mason-org/mason.nvim" })
-  -- LSP自动配置
-  add({ source = "mason-org/mason-lspconfig.nvim" })
-
-  require("mason").setup({
-    ui = {
-      icons = {
-        package_pending = " ",
-        package_installed = " ",
-        package_uninstalled = " ",
-      },
+require("mason").setup({
+  ui = {
+    icons = {
+      package_pending = " ",
+      package_installed = " ",
+      package_uninstalled = " ",
     },
-  })
+  },
+})
 
-  require("mason-lspconfig").setup({})
+local registry = require("mason-registry")
 
-  local config = require("plugins.lang"):get_config()
+local ensured_installed_pkg = {
+  "lua-language-server",
+  "stylua",
+  -- python,
+  "basedpyright",
+  "ruff",
+  -- rust,
+  "rust-analyzer",
+}
 
-  local registry = require("mason-registry")
-
-  local ensured_installed_pkg = {}
-
-  -- 将所有的工具列表合并到 ensured_installed_pkg 中
-  for _, tools in pairs(config.mason) do
-    vim.list_extend(ensured_installed_pkg, tools)
-  end
-
-  for _, pkg_name in ipairs(ensured_installed_pkg) do
-    local ok, pkg = pcall(registry.get_package, pkg_name)
-    if ok then
-      if not pkg:is_installed() then
-        vim.notify("[mason] Installing " .. pkg_name)
-        pkg:install()
-      end
+for _, pkg_name in ipairs(ensured_installed_pkg) do
+  local ok, pkg = pcall(registry.get_package, pkg_name)
+  if ok then
+    if not pkg:is_installed() then
+      vim.notify("[mason] Installing " .. pkg_name)
+      pkg:install()
     end
   end
+end
 
-  vim.diagnostic.config({
-    signs = {
-      text = {
-        [vim.diagnostic.severity.ERROR] = MiniIcons.get("lsp", "error"),
-        [vim.diagnostic.severity.WARN] = MiniIcons.get("lsp", "warn"),
-        [vim.diagnostic.severity.INFO] = MiniIcons.get("lsp", "info"),
-        [vim.diagnostic.severity.HINT] = MiniIcons.get("lsp", "hint"),
-      },
+vim.diagnostic.config({
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = MiniIcons.get("lsp", "error"),
+      [vim.diagnostic.severity.WARN] = MiniIcons.get("lsp", "warn"),
+      [vim.diagnostic.severity.INFO] = MiniIcons.get("lsp", "info"),
+      [vim.diagnostic.severity.HINT] = MiniIcons.get("lsp", "hint"),
     },
-  })
+  },
+})
 
-  for name, cfg in pairs(config.lspconfig) do
-    vim.lsp.config(name, cfg)
-  end
+local enabled_lsp = {
+  "lua_ls",
+  "basedpyright",
+  "ruff",
+  "rust_analyzer",
+}
 
-  for _, setup in ipairs(config.setup) do
-    setup()
-  end
-end)
+for _, lsp in ipairs(enabled_lsp) do
+  vim.lsp.enable(lsp)
+end

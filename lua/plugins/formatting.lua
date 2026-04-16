@@ -1,24 +1,20 @@
-local add, later = MiniDeps.add, MiniDeps.later
+require("conform").setup({
+  notify_on_error = false,
+  formatters_by_ft = {
+    lua = { "stylua" },
+    python = { "ruff" },
+    rust = { "rust-analyzer" },
+  },
+  format_on_save = {
+    timeout_ms = 500,
+    lsp_format = "fallback",
+  },
+})
 
-later(function()
-  add({ source = "stevearc/conform.nvim" })
+vim.keymap.set("n", "<leader>cf", function()
+  require("conform").format({ async = true, lsp_format = "fallback" })
+end, { desc = "Format buffer" })
 
-  local config = require("plugins.lang"):get_config()
-
-  require("conform").setup({
-    notify_on_error = false,
-    formatters_by_ft = config.conform.formatters_by_ft,
-    format_on_save = {
-      timeout_ms = 500,
-      lsp_format = "fallback",
-    },
-  })
-
-  vim.keymap.set("n", "<leader>cf", function()
-    require("conform").format({ async = true, lsp_format = "fallback" })
-  end, { desc = "Format buffer" })
-
-  vim.keymap.set("v", "<leader>cf", function()
-    require("conform").format({ async = true, lsp_format = "fallback" })
-  end, { desc = "Format selection" })
-end)
+vim.keymap.set("v", "<leader>cf", function()
+  require("conform").format({ async = true, lsp_format = "fallback" })
+end, { desc = "Format selection" })
