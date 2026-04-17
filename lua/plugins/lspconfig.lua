@@ -1,12 +1,12 @@
 local add, later = MiniDeps.add, MiniDeps.later
 
 later(function()
-  -- 只读仓库：mason-lspconfig会用这里面的默认配置
-  add({ source = "neovim/nvim-lspconfig" })
+  -- -- 只读仓库：mason-lspconfig会用这里面的默认配置
+  -- add({ source = "neovim/nvim-lspconfig" })
   -- LSP管理器
   add({ source = "mason-org/mason.nvim" })
-  -- LSP自动配置
-  add({ source = "mason-org/mason-lspconfig.nvim" })
+  -- -- LSP自动配置
+  -- add({ source = "mason-org/mason-lspconfig.nvim" })
 
   require("mason").setup({
     ui = {
@@ -18,18 +18,17 @@ later(function()
     },
   })
 
-  require("mason-lspconfig").setup({})
-
-  local config = require("plugins.lang"):get_config()
-
   local registry = require("mason-registry")
 
-  local ensured_installed_pkg = {}
-
-  -- 将所有的工具列表合并到 ensured_installed_pkg 中
-  for _, tools in pairs(config.mason) do
-    vim.list_extend(ensured_installed_pkg, tools)
-  end
+  local ensured_installed_pkg = {
+    "lua-language-server",
+    "stylua",
+    -- python,
+    "basedpyright",
+    "ruff",
+    -- rust,
+    "rust-analyzer",
+  }
 
   for _, pkg_name in ipairs(ensured_installed_pkg) do
     local ok, pkg = pcall(registry.get_package, pkg_name)
@@ -52,11 +51,14 @@ later(function()
     },
   })
 
-  for name, cfg in pairs(config.lspconfig) do
-    vim.lsp.config(name, cfg)
-  end
+  local enabled_lsp = {
+    "lua_ls",
+    "basedpyright",
+    "ruff",
+    "rust_analyzer",
+  }
 
-  for _, setup in ipairs(config.setup) do
-    setup()
+  for _, lsp in ipairs(enabled_lsp) do
+    vim.lsp.enable(lsp)
   end
 end)

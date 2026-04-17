@@ -5,7 +5,6 @@ later(function()
     source = "nvim-neotest/neotest",
     depends = {
       "nvim-neotest/nvim-nio",
-      "nvim-lua/plenary.nvim",
     },
   })
 

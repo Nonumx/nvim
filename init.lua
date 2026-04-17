@@ -7,7 +7,7 @@ if not vim.uv.fs_stat(mini_path) then
     "git",
     "clone",
     "--filter=blob:none",
-    "https://github.com/echasnovski/mini.deps",
+    "https://github.com/nvim-mini/mini.deps",
     mini_path,
   }
   vim.fn.system(clone_cmd)
@@ -17,12 +17,11 @@ end
 -- 配置 mini.deps
 require("mini.deps").setup({ path = { package = path_package } })
 
-require("config.options")
-require("config.keymaps")
+require("config")
 require("plugins.colorscheme")
 require("plugins.ui")
 require("plugins.editor")
 require("plugins.lspconfig")
-require("plugins.coding")
 require("plugins.formatting")
+require("plugins.coding")
 require("plugins.neotest")

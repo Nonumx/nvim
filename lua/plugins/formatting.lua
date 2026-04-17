@@ -3,11 +3,13 @@ local add, later = MiniDeps.add, MiniDeps.later
 later(function()
   add({ source = "stevearc/conform.nvim" })
 
-  local config = require("plugins.lang"):get_config()
-
   require("conform").setup({
     notify_on_error = false,
-    formatters_by_ft = config.conform.formatters_by_ft,
+    formatters_by_ft = {
+      lua = { "stylua" },
+      python = { "ruff" },
+      rust = { "rust-analyzer" },
+    },
     format_on_save = {
       timeout_ms = 500,
       lsp_format = "fallback",
