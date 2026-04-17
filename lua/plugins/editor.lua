@@ -48,6 +48,10 @@ later(function()
   vim.g.loaded_netrwPlugin = 1
 
   require("neo-tree").setup({
+    sources = {
+      "filesystem",
+      "git_status",
+    },
     source_selector = {
       winbar = true,
     },
