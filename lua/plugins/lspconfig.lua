@@ -1,12 +1,10 @@
 local add, later = MiniDeps.add, MiniDeps.later
 
 later(function()
-  -- -- 只读仓库：mason-lspconfig会用这里面的默认配置
-  -- add({ source = "neovim/nvim-lspconfig" })
+  -- 只读仓库：各种 lsp 配置
+  add({ source = "neovim/nvim-lspconfig" })
   -- LSP管理器
   add({ source = "mason-org/mason.nvim" })
-  -- -- LSP自动配置
-  -- add({ source = "mason-org/mason-lspconfig.nvim" })
 
   require("mason").setup({
     ui = {
@@ -52,13 +50,14 @@ later(function()
   })
 
   local enabled_lsp = {
-    "lua_ls",
-    "basedpyright",
-    "ruff",
-    "rust_analyzer",
+    lua_ls = require("plugins.lang.lua_ls"),
+    basedpyright = require("plugins.lang.basedpyright"),
+    ruff = require("plugins.lang.ruff"),
+    rust_analyzer = require("plugins.lang.rust_analyzer"),
   }
 
-  for _, lsp in ipairs(enabled_lsp) do
-    vim.lsp.enable(lsp)
+  for name, config in pairs(enabled_lsp) do
+    vim.lsp.config(name, config)
+    vim.lsp.enable(name)
   end
 end)
