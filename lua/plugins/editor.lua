@@ -11,6 +11,7 @@ later(function()
     { "<leader>c", group = "code", icon = MiniIcons.get("filetype", "code") },
     { "<leader>ca", icon = MiniIcons.get("filetype", "code") },
     { "<leader>e", icon = MiniIcons.get("filetype", "neo-tree") },
+    { "<leader>g", group = "git" },
     { "<leader><space>", icon = MiniIcons.get("filetype", "TelescopePrompt") },
     { "<leader>/", icon = MiniIcons.get("filetype", "TelescopePrompt") },
     { "<leader>/", icon = MiniIcons.get("filetype", "TelescopePrompt") },
@@ -24,7 +25,36 @@ end)
 -- Git状态
 later(function()
   add({ source = "lewis6991/gitsigns.nvim" })
-  require("gitsigns").setup({})
+  require("gitsigns").setup({
+    on_attach = function(buffer)
+      local gs = package.loaded.gitsigns
+
+      local function map(mode, l, r, desc)
+        vim.keymap.set(mode, l, r, { buffer = buffer, desc = desc, silent = true })
+      end
+
+        -- stylua: ignore start
+        map("n", "]h", function()
+          if vim.wo.diff then
+            vim.cmd.normal({ "]c", bang = true })
+          else
+            gs.nav_hunk("next")
+          end
+        end, "Next Hunk")
+        map("n", "[h", function()
+          if vim.wo.diff then
+            vim.cmd.normal({ "[c", bang = true })
+          else
+            gs.nav_hunk("prev")
+          end
+        end, "Prev Hunk")
+        map("n", "]H", function() gs.nav_hunk("last") end, "Last Hunk")
+        map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
+        map("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "Blame Line")
+        map("n", "<leader>gB", function() gs.blame() end, "Blame Buffer")
+        map("n", "<leader>gd", gs.diffthis, "Diff This")
+    end,
+  })
 end)
 
 -- 进度条显示

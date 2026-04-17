@@ -11,7 +11,7 @@ now(function()
       hint = { glyph = "󰌶" },
     },
     filetype = {
-      code = { glyph = "󰗀", hl = "MiniIconsAzure" },
+      code = { glyph = "󰗀", hl = "MiniIconsOrange" },
     },
   })
   MiniIcons.mock_nvim_web_devicons()
