@@ -7,9 +7,6 @@ later(function()
   local wk = require("which-key")
   wk.setup({
     preset = "helix",
-    delay = function(ctx)
-      return ctx.plugin and 0 or 100
-    end,
   })
 
   wk.add({

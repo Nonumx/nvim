@@ -24,6 +24,8 @@ now(function()
   -- 状态栏
   o.laststatus = 3 -- 全局状态栏
 
+  o.timeoutlen = 300
+
   -- keymaps
   local map = vim.keymap.set
 
