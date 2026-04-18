@@ -5,7 +5,12 @@ later(function()
   add({ source = "folke/which-key.nvim" })
 
   local wk = require("which-key")
-  wk.setup({ preset = "helix" })
+  wk.setup({
+    preset = "helix",
+    delay = function(ctx)
+      return ctx.plugin and 0 or 100
+    end,
+  })
 
   wk.add({
     { "<leader>c", group = "code", icon = MiniIcons.get("filetype", "code") },
