@@ -19,7 +19,7 @@ later(function()
     { "<leader>g", group = "git" },
     { "<leader><space>", icon = MiniIcons.get("filetype", "TelescopePrompt") },
     { "<leader>/", icon = MiniIcons.get("filetype", "TelescopePrompt") },
-    { "<leader>/", icon = MiniIcons.get("filetype", "TelescopePrompt") },
+    { "<leader>t", group = "test" },
   })
 
   vim.keymap.set("n", "<leader>?", function()
@@ -160,6 +160,8 @@ end)
 later(function()
   add({ source = "stevearc/overseer.nvim" })
   require("overseer").setup({})
+
+  vim.keymap.set("n", "<F5>", "<cmd>OverseerRun<cr>", { desc = "Run Task" })
 end)
 
 -- 自动保存
