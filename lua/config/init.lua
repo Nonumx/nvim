@@ -10,10 +10,6 @@ now(function()
   })
 
   -- options
-  -- <leader> 键位设置
-  vim.g.mapleader = " "
-  vim.g.maplocalleader = " "
-
   local o = vim.opt
 
   -- 缩进
@@ -23,6 +19,7 @@ now(function()
 
   -- 状态栏
   o.laststatus = 3 -- 全局状态栏
+  o.showcmd = false -- 不进行快捷键回显
 
   o.timeoutlen = 300
 

@@ -17,6 +17,10 @@ end
 -- 配置 mini.deps
 require("mini.deps").setup({ path = { package = path_package } })
 
+-- <leader> 键位设置
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
+
 require("config")
 require("plugins.colorscheme")
 require("plugins.ui")
