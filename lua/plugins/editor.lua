@@ -187,8 +187,8 @@ later(function()
   require("mini.cursorword").setup({})
 end)
 
--- 丝滑滚动
+-- Lazygit 支持
 later(function()
-  add({ source = "karb94/neoscroll.nvim" })
-  require("neoscroll").setup({})
+  add({ source = "kdheepak/lazygit.nvim" })
+  vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "Lazygit" })
 end)
