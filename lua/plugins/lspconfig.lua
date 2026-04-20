@@ -53,7 +53,7 @@ later(function()
     lua_ls = require("plugins.lang.lua_ls"),
     basedpyright = require("plugins.lang.basedpyright"),
     ruff = require("plugins.lang.ruff"),
-    rust_analyzer = require("plugins.lang.rust_analyzer"),
+    -- rust_analyzer = require("plugins.lang.rust_analyzer"), -- rust 通过 rustacenvim 启动
   }
 
   for name, config in pairs(enabled_lsp) do
