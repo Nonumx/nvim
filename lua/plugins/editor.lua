@@ -13,6 +13,7 @@ later(function()
     { "<leader>c", group = "code", icon = MiniIcons.get("filetype", "code") },
     { "<leader>ca", icon = MiniIcons.get("filetype", "code") },
     { "<leader>e", icon = MiniIcons.get("filetype", "neo-tree") },
+    { "<leader>f", group = "find" },
     { "<leader>g", group = "git" },
     { "<leader><space>", icon = MiniIcons.get("filetype", "TelescopePrompt") },
     { "<leader>/", icon = MiniIcons.get("filetype", "TelescopePrompt") },
@@ -149,8 +150,14 @@ later(function()
 
   vim.keymap.set("n", "<leader><space>", builtin.find_files, { desc = "Find Files", silent = true })
   vim.keymap.set("n", "<leader>/", builtin.live_grep, { desc = "Live Grep", silent = true })
+  vim.keymap.set("n", "<leader>ff", builtin.current_buffer_fuzzy_find, { desc = "Fuzzy Find in Buffer", silent = true })
 
   vim.keymap.set("n", "gd", builtin.lsp_definitions, { desc = "LSP: Goto Definitions" })
+  vim.keymap.set("n", "gr", builtin.lsp_references, { desc = "LSP: Find References" })
+  vim.keymap.set("n", "gi", builtin.lsp_implementations, { desc = "LSP: Goto Implementations" })
+  vim.keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "LSP: Document Symbols" })
+  vim.keymap.set("n", "<leader>fS", builtin.lsp_workspace_symbols, { desc = "LSP: Workspace Symbols" })
+  vim.keymap.set("n", "<leader>fd", builtin.diagnostics, { desc = "Find Diagnostics" })
 end)
 
 -- 任务运行
