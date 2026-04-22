@@ -199,5 +199,14 @@ end)
 -- Lazygit 支持
 later(function()
   add({ source = "kdheepak/lazygit.nvim" })
+
+  -- 合并用户自定义配置与主题配置
+  vim.g.lazygit_use_custom_config_file_path = 1
+  local lazygit_config_dir = vim.fn.trim(vim.fn.system("lazygit --print-config-dir"))
+  vim.g.lazygit_config_file_path = {
+    lazygit_config_dir .. "/config.yml",
+    lazygit_config_dir .. "/catppuccin/themes-mergable/mocha/blue.yml",
+  }
+
   vim.keymap.set("n", "<leader>gg", "<cmd>LazyGit<cr>", { desc = "Lazygit" })
 end)
