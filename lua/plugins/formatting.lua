@@ -1,9 +1,7 @@
-local add, later = MiniDeps.add, MiniDeps.later
-
-later(function()
-  add({ source = "stevearc/conform.nvim" })
-
-  require("conform").setup({
+return {
+  "stevearc/conform.nvim",
+  event = "BufWritePre",
+  opts = {
     notify_on_error = false,
     formatters_by_ft = {
       lua = { "stylua" },
@@ -14,13 +12,23 @@ later(function()
       timeout_ms = 500,
       lsp_format = "fallback",
     },
-  })
-
-  vim.keymap.set("n", "<leader>cf", function()
-    require("conform").format({ async = true, lsp_format = "fallback" })
-  end, { desc = "Format buffer" })
-
-  vim.keymap.set("v", "<leader>cf", function()
-    require("conform").format({ async = true, lsp_format = "fallback" })
-  end, { desc = "Format selection" })
-end)
+  },
+  keys = {
+    {
+      "<leader>cf",
+      function()
+        require("conform").format({ async = true, lsp_format = "fallback" })
+      end,
+      desc = "Format buffer",
+      mode = "n",
+    },
+    {
+      "<leader>cf",
+      function()
+        require("conform").format({ async = true, lsp_format = "fallback" })
+      end,
+      desc = "Format selection",
+      mode = "v",
+    },
+  },
+}

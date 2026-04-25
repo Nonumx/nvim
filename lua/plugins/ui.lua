@@ -1,34 +1,94 @@
-local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
-
--- 图标库
-now(function()
-  add({ source = "nvim-mini/mini.icons" })
-  require("mini.icons").setup({
-    lsp = {
-      error = { glyph = "󰅚" },
-      warn = { glyph = "󰀪" },
-      info = { glyph = "󰋽" },
-      hint = { glyph = "󰌶" },
+return {
+  -- 图标库
+  {
+    "nvim-mini/mini.icons",
+    priority = 1000,
+    opts = {
+      lsp = {
+        error = { glyph = "" },
+        warn = { glyph = "" },
+        info = { glyph = "" },
+        hint = { glyph = "" },
+      },
+      filetype = {
+        code = { glyph = "", hl = "MiniIconsOrange" },
+      },
     },
-    filetype = {
-      code = { glyph = "󰗀", hl = "MiniIconsOrange" },
-    },
-  })
-  MiniIcons.mock_nvim_web_devicons()
-end)
+    config = function(_, opts)
+      require("mini.icons").setup(opts)
+      MiniIcons.mock_nvim_web_devicons()
+    end,
+  },
 
--- 通知
-now(function()
-  add({ source = "nvim-mini/mini.notify" })
-  require("mini.notify").setup({
-    lsp_progress = {
-      enable = false,
+  -- QoL plugins for Neovim
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    opts = {
+      bigfile = { enabled = true },
+      explorer = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
+      picker = { enabled = true },
+      notifier = { enabled = true },
+      quickfile = { enabled = true },
+      scope = { enabled = true },
+      scroll = { enabled = true },
+      statuscolumn = { enabled = true },
+      words = { enabled = true },
     },
-  })
-end)
+    keys = {
+      {
+        "<leader><space>",
+        function()
+          Snacks.picker.smart()
+        end,
+        desc = "Find Files",
+      },
+      {
+        "<leader>/",
+        function()
+          Snacks.picker.grep()
+        end,
+        desc = "Grep Files",
+      },
+      {
+        "<leader>n",
+        function()
+          Snacks.picker.notifications()
+        end,
+        desc = "Notification History",
+      },
+      {
+        "<leader>e",
+        function()
+          Snacks.explorer()
+        end,
+        desc = "File Explorer",
+      },
+      {
+        "<leader>gg",
+        function()
+          Snacks.lazygit()
+        end,
+        desc = "Lazygit",
+      },
+    },
+  },
 
--- 状态栏
-later(function()
-  add({ source = "nvim-mini/mini.statusline" })
-  require("mini.statusline").setup({})
-end)
+  -- 状态栏
+  {
+    "nvim-mini/mini.statusline",
+    opts = {},
+  },
+
+  -- zpack 插件面板
+  {
+    "sairyy/zshow.nvim",
+    keys = {
+      { "<leader>z", "<cmd>ZShow<cr>", desc = "View installed plugins" },
+    },
+    cmd = "ZShow",
+  },
+}
