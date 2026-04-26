@@ -7,6 +7,9 @@ return {
       lua = { "stylua" },
       python = { "ruff" },
       rust = { "rust-analyzer" },
+      javascript = { "biome" },
+      typescript = { "biome" },
+      svelte = { "biome" },
     },
     format_on_save = {
       timeout_ms = 500,

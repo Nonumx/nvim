@@ -27,6 +27,10 @@ return {
         "ruff",
         -- rust
         "rust-analyzer",
+        -- typescript/javascript/svelte
+        "vtsls",
+        "svelte-language-server",
+        "biome",
       }
 
       for _, pkg_name in ipairs(ensured_installed_pkg) do
@@ -54,6 +58,8 @@ return {
         lua_ls = require("plugins.lang.lua_ls"),
         basedpyright = {},
         ruff = {},
+        vtsls = {},
+        svelte = {},
       }
 
       for name, config in pairs(enabled_lsp) do
