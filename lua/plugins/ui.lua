@@ -3,6 +3,7 @@ return {
   {
     "nvim-mini/mini.icons",
     priority = 1000,
+    lazy = false,
     opts = {
       lsp = {
         error = { glyph = "" },
