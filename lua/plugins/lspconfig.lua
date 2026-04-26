@@ -58,7 +58,7 @@ return {
         lua_ls = require("plugins.lang.lua_ls"),
         basedpyright = {},
         ruff = {},
-        vtsls = {},
+        vtsls = require("plugins.lang.vtsls"),
         svelte = {},
       }
 
