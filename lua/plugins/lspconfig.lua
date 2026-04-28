@@ -90,7 +90,7 @@ return {
           end
 
           if client.server_capabilities.documentSymbolProvider then
-            vim.keymap.set("n", "<leader>s", function()
+            vim.keymap.set("n", "<leader>ss", function()
               Snacks.picker.lsp_symbols()
             end, { buffer = bufnr, desc = "LSP Symbols", silent = true })
           end

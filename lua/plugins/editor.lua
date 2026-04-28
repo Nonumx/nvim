@@ -7,8 +7,9 @@ return {
       preset = "helix",
       spec = {
         mode = { "n", "x" },
-        { "<leader>c", group = "code", icon = { icon = "", hl = "MiniIconsAzure" } },
+        { "<leader>c", group = "code", icon = { icon = "", hl = "MiniIconsOrange" } },
         { "<leader>g", group = "git" },
+        { "<leader>s", group = "search", icon = { icon = "", hl = "MiniIconsOrange" } },
         { "<leader><space>", icon = { icon = "", hl = "MiniIconsGreen" } },
         { "<leader>/", icon = { icon = "", hl = "MiniIconsGreen" } },
         { "<leader>e", icon = { icon = "󰙅", hl = "MiniIconsYellow" } },
@@ -94,6 +95,30 @@ return {
         immediate_save = { "BufLeave", "FocusLost" },
         defer_save = {},
         cancel_deferred_save = {},
+      },
+    },
+  },
+
+  -- 搜索/替换
+  {
+    "MagicDuck/grug-far.nvim",
+    opts = { headerMaxWidth = 80 },
+    cmd = { "GrugFar", "GrugFarWithin" },
+    keys = {
+      {
+        "<leader>sr",
+        function()
+          local grug = require("grug-far")
+          local ext = vim.bo.buftype == "" and vim.fn.expand("%:e")
+          grug.open({
+            transient = true,
+            prefills = {
+              filesFilter = ext and ext ~= "" and "*." .. ext or nil,
+            },
+          })
+        end,
+        mode = { "n", "x" },
+        desc = "Search and Replace",
       },
     },
   },
