@@ -7,6 +7,7 @@ return {
       preset = "helix",
       spec = {
         mode = { "n", "x" },
+        { "<leader>a", group = "ai" },
         { "<leader>c", group = "code", icon = { icon = "", hl = "MiniIconsOrange" } },
         { "<leader>g", group = "git" },
         { "<leader>s", group = "search", icon = { icon = "", hl = "MiniIconsOrange" } },

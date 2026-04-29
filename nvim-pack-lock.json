@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "agentic.nvim": {
+      "rev": "3e6175c1141cc3cb5cc08e98bff01b06a0a67467",
+      "src": "https://github.com/carlos-algms/agentic.nvim"
+    },
     "auto-save.nvim": {
       "rev": "9aabcb8396224dcbf8d51c0c1d620d88a46e89d7",
       "src": "https://github.com/okuuva/auto-save.nvim"
@@ -64,6 +68,10 @@
     "overseer.nvim": {
       "rev": "f818eefff81f4b12fb7cf236f1b6c16768a2fcbc",
       "src": "https://github.com/stevearc/overseer.nvim"
+    },
+    "render-markdown.nvim": {
+      "rev": "3f3eea97b80839f629c951ca660ffd125bfa5b34",
+      "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "rustaceanvim": {
       "rev": "2497c7b2a61d4eb5dad716371a64ea82fb068bee",
