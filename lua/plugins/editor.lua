@@ -7,18 +7,17 @@ return {
       preset = "helix",
       spec = {
         mode = { "n", "x" },
-        { "<leader>a", group = "ai" },
         { "<leader>c", group = "code", icon = { icon = "", hl = "MiniIconsOrange" } },
         { "<leader>g", group = "git" },
         { "<leader>s", group = "search", icon = { icon = "", hl = "MiniIconsOrange" } },
-        { "<leader><space>", icon = { icon = "", hl = "MiniIconsGreen" } },
-        { "<leader>/", icon = { icon = "", hl = "MiniIconsGreen" } },
-        { "<leader>e", icon = { icon = "󰙅", hl = "MiniIconsYellow" } },
-        { "<leader>z", icon = { icon = "", hl = "MiniIconsPurple" } },
         { "[", group = "prev" },
         { "]", group = "next" },
         { "g", group = "goto" },
         { "z", group = "fold" },
+        { "<leader><space>", icon = { icon = "", hl = "MiniIconsGreen" }, mode = "n" },
+        { "<leader>/", icon = { icon = "", hl = "MiniIconsGreen" }, mode = "n" },
+        { "<leader>e", icon = { icon = "󰙅", hl = "MiniIconsYellow" }, mode = "n" },
+        { "<leader>z", icon = { icon = "", hl = "MiniIconsPurple" }, mode = "n" },
       },
     },
     keys = {
@@ -122,5 +121,12 @@ return {
         desc = "Search and Replace",
       },
     },
+  },
+
+  -- 恢复编辑会话
+  {
+    "olimorris/persisted.nvim",
+    event = "BufReadPre", -- Ensure the plugin loads only when a buffer has been loaded
+    opts = {},
   },
 }
