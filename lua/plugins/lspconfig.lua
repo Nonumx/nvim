@@ -86,7 +86,13 @@ return {
           if client.server_capabilities.referencesProvider then
             vim.keymap.set("n", "gr", function()
               Snacks.picker.lsp_references()
-            end, { buffer = bufnr, desc = "References", silent = true, nowait = true })
+            end, { buffer = bufnr, desc = "Goto References", silent = true, nowait = true })
+          end
+
+          if client.server_capabilities.implementationProvider then
+            vim.keymap.set("n", "gi", function()
+              Snacks.picker.lsp_implementations()
+            end, { buffer = bufnr, desc = "Goto Implementations", silent = true, nowait = true })
           end
 
           if client.server_capabilities.documentSymbolProvider then

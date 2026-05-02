@@ -37,9 +37,6 @@ return {
           },
         },
       },
-      enabled = function()
-        return not vim.tbl_contains({ "AgenticInput" }, vim.bo.filetype)
-      end,
     },
   },
 
