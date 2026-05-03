@@ -3,14 +3,7 @@ return {
   event = "BufWritePre",
   opts = {
     notify_on_error = false,
-    formatters_by_ft = {
-      lua = { "stylua" },
-      python = { "ruff" },
-      rust = { "rust-analyzer" },
-      javascript = { "biome" },
-      typescript = { "biome" },
-      svelte = { "biome" },
-    },
+    formatters_by_ft = {},
     format_on_save = {
       timeout_ms = 500,
       lsp_format = "fallback",

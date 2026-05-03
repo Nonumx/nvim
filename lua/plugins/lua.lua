@@ -1,5 +1,4 @@
----@type vim.lsp.Config
-return {
+local lspconfig = {
   on_init = function(client)
     local is_nvim_config = false
     if client.workspace_folders then
@@ -38,4 +37,27 @@ return {
       },
     })
   end,
+}
+
+return {
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      ensure_installed = {
+        "lua-language-server",
+        "stylua",
+      },
+      servers = {
+        lua_ls = lspconfig,
+      },
+    },
+  },
+  {
+    "stevearc/conform.nvim",
+    opts = {
+      formatters_by_ft = {
+        lua = { "stylua" },
+      },
+    },
+  },
 }

@@ -1,3 +1,7 @@
+---@class lspconfig.opts
+---@field ensure_installed string[]
+---@field servers table<string, vim.lsp.Config>
+
 return {
   -- LSP 管理器
   {
@@ -6,7 +10,12 @@ return {
     dependencies = {
       "mason-org/mason.nvim",
     },
-    config = function()
+    ---@type lspconfig.opts
+    opts = {
+      ensure_installed = {},
+      servers = {},
+    },
+    config = function(_, opts)
       require("mason").setup({
         ui = {
           icons = {
@@ -16,32 +25,6 @@ return {
           },
         },
       })
-
-      local registry = require("mason-registry")
-
-      local ensured_installed_pkg = {
-        "lua-language-server",
-        "stylua",
-        -- python
-        "basedpyright",
-        "ruff",
-        -- rust
-        "rust-analyzer",
-        -- typescript/javascript/svelte
-        "vtsls",
-        "svelte-language-server",
-        "biome",
-      }
-
-      for _, pkg_name in ipairs(ensured_installed_pkg) do
-        local ok, pkg = pcall(registry.get_package, pkg_name)
-        if ok then
-          if not pkg:is_installed() then
-            vim.notify("[mason] Installing " .. pkg_name)
-            pkg:install()
-          end
-        end
-      end
 
       vim.diagnostic.config({
         signs = {
@@ -54,20 +37,6 @@ return {
         },
       })
 
-      local enabled_lsp = {
-        lua_ls = require("plugins.lang.lua_ls"),
-        basedpyright = {},
-        ruff = {},
-        vtsls = require("plugins.lang.vtsls"),
-        svelte = {},
-      }
-
-      for name, config in pairs(enabled_lsp) do
-        vim.lsp.config(name, config)
-        vim.lsp.enable(name)
-      end
-
-      -- Snacks picker LSP keymaps
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("UserLspKeymaps", { clear = true }),
         callback = function(args)
@@ -102,6 +71,23 @@ return {
           end
         end,
       })
+
+      local registry = require("mason-registry")
+
+      for _, pkg_name in ipairs(opts.ensure_installed) do
+        local ok, pkg = pcall(registry.get_package, pkg_name)
+        if ok then
+          if not pkg:is_installed() then
+            vim.notify("[mason] Installing " .. pkg_name)
+            pkg:install()
+          end
+        end
+      end
+
+      for name, config in pairs(opts.servers) do
+        vim.lsp.config(name, config)
+        vim.lsp.enable(name)
+      end
     end,
   },
 }
