@@ -16,11 +16,10 @@ return {
   },
   {
     "neovim/nvim-lspconfig",
-    opts = {
-      ensure_installed = {
-        "rust-analyzer",
-      },
-      -- lspconfig 由 rustaceanvim 控制
-    },
+    ---@param opts lspconfig.opts
+    opts = function(_, opts)
+      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, { "rust-analyzer" })
+      return opts
+    end,
   },
 }

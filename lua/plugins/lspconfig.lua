@@ -10,11 +10,6 @@ return {
     dependencies = {
       "mason-org/mason.nvim",
     },
-    ---@type lspconfig.opts
-    opts = {
-      ensure_installed = {},
-      servers = {},
-    },
     config = function(_, opts)
       require("mason").setup({
         ui = {

@@ -1,12 +1,15 @@
 return {
   {
     "neovim/nvim-lspconfig",
-    opts = {
-      ensure_installed = { "vtsls", "biome" },
-      servers = {
-        vtsls = {},
-      },
-    },
+    ---@param opts lspconfig.opts
+    opts = function(_, opts)
+      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, { "vtsls", "biome" })
+      return vim.tbl_deep_extend("force", opts, {
+        servers = {
+          vtsls = {},
+        },
+      })
+    end,
   },
   {
     "stevearc/conform.nvim",
@@ -18,4 +21,3 @@ return {
     },
   },
 }
-

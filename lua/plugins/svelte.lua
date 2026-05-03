@@ -4,25 +4,28 @@ local svelte_plugin = vim.fn.stdpath("data")
 return {
   {
     "neovim/nvim-lspconfig",
-    opts = {
-      ensure_installed = { "svelte-language-server" },
-      servers = {
-        vtsls = {
-          settings = {
-            vtsls = {
-              tsserver = {
-                globalPlugins = {
-                  name = "typescript-svelte-plugin",
-                  location = svelte_plugin,
-                  enableForWorkspaceTypeScriptVersions = true,
+    ---@param opts lspconfig.opts
+    opts = function(_, opts)
+      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, { "svelte-language-server" })
+      return vim.tbl_deep_extend("force", opts, {
+        servers = {
+          vtsls = {
+            settings = {
+              vtsls = {
+                tsserver = {
+                  globalPlugins = {
+                    name = "typescript-svelte-plugin",
+                    location = svelte_plugin,
+                    enableForWorkspaceTypeScriptVersions = true,
+                  },
                 },
               },
             },
           },
+          svelte = {},
         },
-        svelte = {},
-      },
-    },
+      })
+    end,
   },
   {
     "stevearc/conform.nvim",

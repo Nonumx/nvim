@@ -42,15 +42,15 @@ local lspconfig = {
 return {
   {
     "neovim/nvim-lspconfig",
-    opts = {
-      ensure_installed = {
-        "lua-language-server",
-        "stylua",
-      },
-      servers = {
-        lua_ls = lspconfig,
-      },
-    },
+    ---@param opts lspconfig.opts
+    opts = function(_, opts)
+      opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, { "lua-language-server", "stylua" })
+      return vim.tbl_deep_extend("force", opts, {
+        servers = {
+          lua_ls = lspconfig,
+        },
+      })
+    end,
   },
   {
     "stevearc/conform.nvim",
