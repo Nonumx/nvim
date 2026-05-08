@@ -9,7 +9,7 @@ return {
   -- 补全引擎
   {
     "saghen/blink.cmp",
-    version = "v1.10.2",
+    sem_version = "^1",
     event = "InsertEnter",
     dependencies = { "rafamadriz/friendly-snippets" },
     opts = {
