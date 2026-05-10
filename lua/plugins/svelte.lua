@@ -14,9 +14,11 @@ return {
               vtsls = {
                 tsserver = {
                   globalPlugins = {
-                    name = "typescript-svelte-plugin",
-                    location = svelte_plugin,
-                    enableForWorkspaceTypeScriptVersions = true,
+                    {
+                      name = "typescript-svelte-plugin",
+                      location = svelte_plugin,
+                      enableForWorkspaceTypeScriptVersions = true,
+                    },
                   },
                 },
               },
