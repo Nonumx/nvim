@@ -6,6 +6,13 @@ return {
     opts = {},
   },
 
+  -- 括号回绕
+  {
+    "nvim-mini/mini.surround",
+    event = "VeryLazy",
+    opts = {},
+  },
+
   -- 补全引擎
   {
     "saghen/blink.cmp",
