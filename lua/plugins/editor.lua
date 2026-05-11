@@ -126,7 +126,7 @@ return {
   -- 恢复编辑会话
   {
     "olimorris/persisted.nvim",
-    event = "BufReadPre", -- Ensure the plugin loads only when a buffer has been loaded
+    event = "BufReadPre",
     opts = {},
   },
 }
