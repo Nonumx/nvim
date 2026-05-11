@@ -10,4 +10,5 @@ return {
   { import = "astrocommunity.pack.rust" },
   { import = "astrocommunity.pack.python" },
   { import = "astrocommunity.markdown-and-latex.render-markdown-nvim" },
+  { import = "astrocommunity.programming-language-support.kulala-nvim" },
 }
