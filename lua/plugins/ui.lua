@@ -75,6 +75,13 @@ return {
         end,
         desc = "Lazygit",
       },
+      {
+        "<leader>tt",
+        function()
+          Snacks.terminal()
+        end,
+        desc = "Lazygit",
+      },
     },
   },
 
