@@ -76,11 +76,11 @@ return {
         desc = "Lazygit",
       },
       {
-        "<leader>tt",
+        "<leader>t",
         function()
           Snacks.terminal()
         end,
-        desc = "Lazygit",
+        desc = "Terminal",
       },
     },
   },
