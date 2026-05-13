@@ -20,4 +20,13 @@ return {
       },
     },
   },
+  {
+    "linux-cultist/venv-selector.nvim",
+    ft = "python",
+    keys = { { "<leader>cv", "<cmd>VenvSelect<cr>", desc = "Select Venv" } },
+    opts = {
+      options = {}, -- plugin-side options
+      search = {}, -- custom search definitions
+    },
+  },
 }
