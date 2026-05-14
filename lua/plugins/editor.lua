@@ -1,36 +1,4 @@
 return {
-  -- 快捷键提示
-  {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    opts = {
-      preset = "helix",
-      spec = {
-        mode = { "n", "x" },
-        { "<leader>c", group = "code", icon = { icon = "", hl = "MiniIconsOrange" } },
-        { "<leader>g", group = "git" },
-        { "<leader>s", group = "search", icon = { icon = "", hl = "MiniIconsOrange" } },
-        { "[", group = "prev" },
-        { "]", group = "next" },
-        { "g", group = "goto" },
-        { "z", group = "fold" },
-        { "<leader><space>", icon = { icon = "", hl = "MiniIconsGreen" }, mode = "n" },
-        { "<leader>/", icon = { icon = "", hl = "MiniIconsGreen" }, mode = "n" },
-        { "<leader>e", icon = { icon = "󰙅", hl = "MiniIconsYellow" }, mode = "n" },
-        { "<leader>z", icon = { icon = "", hl = "MiniIconsPurple" }, mode = "n" },
-      },
-    },
-    keys = {
-      {
-        "<leader>?",
-        function()
-          require("which-key").show({ global = false })
-        end,
-        desc = "Buffer Keymaps (which-key)",
-      },
-    },
-  },
-
   -- Git 状态
   {
     "lewis6991/gitsigns.nvim",
@@ -74,16 +42,6 @@ return {
     "j-hui/fidget.nvim",
     event = "LspAttach",
     opts = {},
-  },
-
-  -- 任务运行
-  {
-    "stevearc/overseer.nvim",
-    opts = {},
-    cmd = "OverseerRun",
-    keys = {
-      { "<F5>", "<cmd>OverseerRun<cr>", desc = "Run Task" },
-    },
   },
 
   -- 自动保存

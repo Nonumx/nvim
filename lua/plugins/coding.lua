@@ -9,7 +9,7 @@ return {
   -- 括号回绕
   {
     "nvim-mini/mini.surround",
-    event = "VeryLazy",
+    event = "InsertEnter",
     opts = {},
   },
 
@@ -22,6 +22,7 @@ return {
     opts = {
       keymap = {
         preset = "super-tab",
+        ["<CR>"] = { "accept", "fallback" },
       },
       appearance = {
         nerd_font_variant = "normal",
@@ -43,31 +44,6 @@ return {
             },
           },
         },
-      },
-    },
-  },
-
-  -- 根据文本判断 tab 缩进
-  {
-    "nmac427/guess-indent.nvim",
-    event = "BufReadPre",
-    opts = {},
-  },
-
-  -- Code Action
-  {
-    "rachartier/tiny-code-action.nvim",
-    opts = {
-      backend = "delta",
-    },
-    keys = {
-      {
-        "<leader>ca",
-        function()
-          require("tiny-code-action").code_action({})
-        end,
-        desc = "Code Action",
-        mode = { "n", "x" },
       },
     },
   },

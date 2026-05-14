@@ -47,7 +47,7 @@ return {
       opts.ensure_installed = vim.list_extend(opts.ensure_installed or {}, { "lua-language-server", "stylua" })
       return vim.tbl_deep_extend("force", opts, {
         servers = {
-          lua_ls = lspconfig,
+          lua_ls = {},
         },
       })
     end,
