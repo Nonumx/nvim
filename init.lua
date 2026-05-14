@@ -2,4 +2,7 @@
 vim.pack.add({ "https://github.com/zuqini/zpack.nvim" })
 
 require("config")
-require("zpack").setup()
+require("zpack").setup({
+  { import = "plugins" },
+  { import = "plugins.lang" },
+})

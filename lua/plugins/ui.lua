@@ -11,9 +11,6 @@ return {
         info = { glyph = "" },
         hint = { glyph = "" },
       },
-      filetype = {
-        code = { glyph = "", hl = "MiniIconsOrange" },
-      },
     },
     config = function(_, opts)
       require("mini.icons").setup(opts)

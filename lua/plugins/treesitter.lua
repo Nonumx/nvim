@@ -17,42 +17,20 @@ return {
           return
         end
 
-        -- 获取所有可用的 treesitter 语言
         local ts = require("nvim-treesitter")
         local langs = ts.get_available()
 
-        -- 查找与当前文件类型匹配的解析器名称
-        local target_lang = nil
-        for _, lang in ipairs(langs) do
-          -- 先尝试直接匹配（大多数文件类型名 = 解析器名）
-          if lang == ft then
-            target_lang = lang
-            break
-          end
-          -- 再通过 Neovim 内置的 treesitter 语言注册表查找
-          local fts_ok, fts = pcall(vim.treesitter.language.get_filetypes, lang)
-          if fts_ok and fts and vim.tbl_contains(fts, ft) then
-            target_lang = lang
-            break
-          end
+        if not vim.tbl_contains(langs, ft) then
+          return
         end
 
-        if target_lang then
-          -- 检查是否已安装
-          local installed = ts.get_installed("parsers")
-          if not vim.tbl_contains(installed, target_lang) then
-            -- 异步安装（不阻塞编辑体验）
-            ts.install({ target_lang })
-          end
+        local installed = ts.get_installed("parsers")
+        if not vim.tbl_contains(installed, ft) then
+          ts.install({ ft })
         end
 
-        -- 为当前 buffer 启用 treesitter 语法高亮（Neovim 内置 API）
-        pcall(vim.treesitter.start, args.buf)
-
-        -- 启用 treesitter 缩进（由 nvim-treesitter 提供）
-        pcall(function()
-          vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-        end)
+        vim.treesitter.start(args.buf)
+        vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end,
     })
   end,

@@ -1,3 +1,7 @@
+if true then
+  return {}
+end
+
 return {
   -- Rust LSP 支持（打开 Rust 文件时触发）
   -- 替代默认的 rust-analyzer lspconfig 启动

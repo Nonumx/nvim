@@ -81,10 +81,17 @@ return {
     },
   },
 
-  -- 恢复编辑会话
+  -- 文件管理器
   {
-    "olimorris/persisted.nvim",
-    event = "BufReadPre",
+    "stevearc/oil.nvim",
+    ---@module 'oil'
+    ---@type oil.SetupOpts
     opts = {},
+    lazy = false,
+    keys = {
+      "-",
+      "<cmd>Oil<cr>",
+      { desc = "Open parent directory" },
+    },
   },
 }
