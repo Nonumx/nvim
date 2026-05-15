@@ -103,8 +103,8 @@ return {
     ---@diagnostic disable: missing-fields
     opts = {},
     keys = {
-      { "<leader><space>", "<cmd>FzfLua files", desc = "Find Files" },
-      { "<leader>/", "<cmd>FzfLua live_grep", desc = "Grep" },
+      { "<leader><space>", "<cmd>FzfLua files<cr>", desc = "Find Files" },
+      { "<leader>/", "<cmd>FzfLua live_grep<cr>", desc = "Grep" },
       { "<leader>:", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
       {
         "<leader>fc",
@@ -114,7 +114,7 @@ return {
         desc = "Find Config File",
       },
       { "<leader>sk", "<cmd>FzfLua keymaps<cr>", desc = "Key Maps" },
-      { "<leader>ss", "<cmd>FzfLua lsp_document_symbols", desc = "Goto Symbol" },
+      { "<leader>ss", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Goto Symbol" },
     },
   },
 }
