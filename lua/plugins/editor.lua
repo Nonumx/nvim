@@ -117,4 +117,56 @@ return {
       { "<leader>ss", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Goto Symbol" },
     },
   },
+
+  -- 终端管理
+  {
+    "akinsho/toggleterm.nvim",
+    sem_version = "^2",
+    cmd = { "ToggleTerm" },
+    keys = {
+      { "<leader>t", "<Cmd>ToggleTerm size=12 direction=horizontal<CR>", desc = "Terminal (Bottom)" },
+      {
+        "<leader>gg",
+        function()
+          if vim.fn.executable("lazygit") ~= 1 then
+            vim.notify("lazygit is not installed", vim.log.levels.WARN)
+            return
+          end
+          local git_root = vim.fs.root(0, ".git")
+          if not git_root then
+            vim.notify("Not in a git repository", vim.log.levels.WARN)
+            return
+          end
+          local Term = require("toggleterm.terminal").Terminal
+          local lazygit_term = Term:new({
+            cmd = "lazygit",
+            dir = git_root,
+            direction = "float",
+            hidden = true,
+          })
+          lazygit_term:toggle()
+        end,
+        desc = "Lazygit",
+      },
+    },
+    opts = {
+      size = 12,
+      direction = "horizontal",
+      shading_factor = 2,
+      highlights = {
+        Normal = { link = "Normal" },
+        NormalNC = { link = "NormalNC" },
+        NormalFloat = { link = "NormalFloat" },
+        FloatBorder = { link = "FloatBorder" },
+        StatusLine = { link = "StatusLine" },
+        StatusLineNC = { link = "StatusLineNC" },
+        WinBar = { link = "WinBar" },
+        WinBarNC = { link = "WinBarNC" },
+      },
+      on_create = function()
+        vim.opt_local.foldcolumn = "0"
+        vim.opt_local.signcolumn = "no"
+      end,
+    },
+  },
 }

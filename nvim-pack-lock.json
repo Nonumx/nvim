@@ -73,6 +73,11 @@
       "rev": "629eb9533ec989d9d5c6cab8f3ad5372422c24e0",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
+    "toggleterm.nvim": {
+      "rev": "50ea089fc548917cc3cc16b46a8211833b9e3c7c",
+      "src": "https://github.com/akinsho/toggleterm.nvim",
+      "version": "2.0.0 - 3.0.0"
+    },
     "zpack.nvim": {
       "rev": "8d02f50245ec43bd5dc835dc574d460e4c61bcec",
       "src": "https://github.com/zuqini/zpack.nvim"
