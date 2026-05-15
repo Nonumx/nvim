@@ -94,4 +94,27 @@ return {
       { desc = "Open parent directory" },
     },
   },
+
+  -- fzf-lua
+  {
+    "ibhagwan/fzf-lua",
+    ---@module "fzf-lua"
+    ---@type fzf-lua.Config|{}
+    ---@diagnostic disable: missing-fields
+    opts = {},
+    keys = {
+      { "<leader><space>", "<cmd>FzfLua files", desc = "Find Files" },
+      { "<leader>/", "<cmd>FzfLua live_grep", desc = "Grep" },
+      { "<leader>:", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
+      {
+        "<leader>fc",
+        function()
+          require("fzf-lua").files({ cwd = vim.fn.stdpath("config") })
+        end,
+        desc = "Find Config File",
+      },
+      { "<leader>sk", "<cmd>FzfLua keymaps<cr>", desc = "Key Maps" },
+      { "<leader>ss", "<cmd>FzfLua lsp_document_symbols", desc = "Goto Symbol" },
+    },
+  },
 }

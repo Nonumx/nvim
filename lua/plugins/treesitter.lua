@@ -24,13 +24,17 @@ return {
           return
         end
 
-        local installed = ts.get_installed("parsers")
-        if not vim.tbl_contains(installed, ft) then
-          ts.install({ ft })
+        local start_treesitter = function()
+          vim.treesitter.start(args.buf)
+          vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         end
 
-        vim.treesitter.start(args.buf)
-        vim.bo[args.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+        local installed = ts.get_installed("parsers")
+        if vim.tbl_contains(installed, ft) then
+          start_treesitter()
+        else
+          ts.install({ ft })
+        end
       end,
     })
   end,
