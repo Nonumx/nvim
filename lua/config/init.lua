@@ -26,7 +26,14 @@ o.expandtab = true
 -- 状态栏
 o.laststatus = 3 -- 全局状态栏
 o.showmode = false -- 不进行状态模式回显
-o.showcmd = false -- 不进行快捷键回显
+o.showcmd = false -- 不进行按键回显
+
+-- 行号与折叠列
+o.number = true
+o.relativenumber = true
+
+-- 命令行合并到状态栏
+o.cmdheight = 0
 
 -- keymaps
 local map = vim.keymap.set
