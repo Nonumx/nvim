@@ -47,4 +47,15 @@ return {
       },
     },
   },
+
+  -- neovim 开发
+  {
+    "folke/lazydev.nvim",
+    ft = "lua", -- only load on lua files
+    opts = {
+      library = {
+        { path = "mini.icons", words = { "MiniIcons" } },
+      },
+    },
+  },
 }
