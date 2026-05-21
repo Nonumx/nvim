@@ -9,6 +9,7 @@ return {
     event = "VeryLazy",
     dependencies = {
       "mason-org/mason.nvim",
+      "mason-org/mason-lspconfig.nvim",
     },
     config = function(_, opts)
       require("mason").setup({
@@ -20,6 +21,8 @@ return {
           },
         },
       })
+
+      require("mason-lspconfig").setup({})
 
       vim.diagnostic.config({
         signs = {
@@ -73,7 +76,6 @@ return {
 
       for name, config in pairs(opts.servers) do
         vim.lsp.config(name, config)
-        vim.lsp.enable(name)
       end
     end,
   },

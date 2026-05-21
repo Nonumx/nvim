@@ -89,9 +89,8 @@ return {
     opts = {},
     lazy = false,
     keys = {
-      "-",
-      "<cmd>Oil<cr>",
-      { desc = "Open parent directory" },
+      { "-", "<cmd>Oil<cr>", { desc = "Open parent directory" } },
+      { "<leader>e", "<cmd>Oil<cr>", { desc = "Open Explorer" } },
     },
   },
 

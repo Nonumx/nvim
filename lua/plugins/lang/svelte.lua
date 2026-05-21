@@ -28,7 +28,6 @@ return {
               },
             },
           },
-          svelte = {},
         },
       })
     end,
