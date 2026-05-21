@@ -214,7 +214,9 @@ return {
           miniclue.gen_clues.windows(),
           miniclue.gen_clues.z(),
         },
-        delay = 300,
+        window = {
+          delay = 300,
+        },
       })
     end,
   },
