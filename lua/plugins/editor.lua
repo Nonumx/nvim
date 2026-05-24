@@ -101,6 +101,7 @@ return {
     ---@type fzf-lua.Config|{}
     ---@diagnostic disable: missing-fields
     opts = {},
+    cmd = "FzfLua",
     keys = {
       { "<leader><space>", "<cmd>FzfLua files<cr>", desc = "Find Files" },
       { "<leader>/", "<cmd>FzfLua live_grep<cr>", desc = "Grep" },
