@@ -27,6 +27,7 @@ o.expandtab = true
 o.laststatus = 3 -- 全局状态栏
 o.showmode = false -- 不进行状态模式回显
 o.showcmd = false -- 不进行按键回显
+o.showtabline = 2 -- 显示 tabline
 
 -- 行号与折叠列
 o.number = true
