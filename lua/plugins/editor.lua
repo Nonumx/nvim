@@ -217,6 +217,14 @@ return {
         },
         window = {
           delay = 300,
+          config = function(buf_id)
+            return {
+              height = math.min(10, math.max(1, vim.api.nvim_buf_line_count(buf_id))),
+            }
+          end,
+
+          scroll_down = "<C-d>",
+          scroll_up = "<C-u>",
         },
       })
     end,
