@@ -229,4 +229,13 @@ return {
       })
     end,
   },
+
+  -- 会话管理
+  {
+    "nvim-mini/mini.sessions",
+    init = function()
+      vim.o.sessionoptions = "buffers,curdir,folds"
+    end,
+    opts = {},
+  },
 }
