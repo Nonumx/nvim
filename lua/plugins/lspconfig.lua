@@ -59,6 +59,9 @@ return {
           if client.server_capabilities.typeDefinitionProvider then
             vim.keymap.set("n", "gy", "<cmd>FzfLua lsp_typedefs jump1=true ignore_current_line=true<cr>", keymap_opts)
           end
+          if client.server_capabilities.codeActionProvider then
+            vim.keymap.set("n", "<leader>ca", "<cmd>FzfLua lsp_code_actions<cr>", keymap_opts)
+          end
         end,
       })
 
