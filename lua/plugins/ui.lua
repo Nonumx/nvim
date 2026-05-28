@@ -21,9 +21,6 @@ return {
   -- zpack 插件面板
   {
     "sairyy/zshow.nvim",
-    keys = {
-      { "<leader>z", "<cmd>ZShow<cr>", desc = "View installed plugins" },
-    },
     cmd = "ZShow",
   },
 

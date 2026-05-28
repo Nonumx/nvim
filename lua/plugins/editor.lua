@@ -222,27 +222,6 @@ return {
         desc = "Goto Implementation",
       },
       {
-        "gy",
-        function()
-          Snacks.picker.lsp_type_definitions()
-        end,
-        desc = "Goto Type Definition",
-      },
-      {
-        "gai",
-        function()
-          Snacks.picker.lsp_incoming_calls()
-        end,
-        desc = "Calls Incoming",
-      },
-      {
-        "gao",
-        function()
-          Snacks.picker.lsp_outgoing_calls()
-        end,
-        desc = "Calls Outgoing",
-      },
-      {
         "<leader>ss",
         function()
           Snacks.picker.lsp_symbols()
@@ -302,5 +281,40 @@ return {
       vim.o.sessionoptions = "buffers,curdir,folds"
     end,
     opts = {},
+  },
+
+  -- code outline
+  {
+    "stevearc/aerial.nvim",
+    event = "VeryLazy",
+    opts = {
+      guides = {
+        mid_item = "├╴",
+        last_item = "└╴",
+        nested_top = "│ ",
+        whitespace = "  ",
+      },
+    },
+    keys = {
+      { "<leader>cs", "<cmd>AerialToggle<cr>", desc = "Aerial (Symbols)" },
+    },
+  },
+
+  -- code action
+  {
+    "rachartier/tiny-code-action.nvim",
+    event = "LspAttach",
+    opts = { backend = "delta" },
+    keys = {
+      {
+        "<leader>ca",
+        function()
+          require("tiny-code-action").code_action({})
+        end,
+        noremap = true,
+        silent = true,
+        desc = "Code Actions",
+      },
+    },
   },
 }
