@@ -2,6 +2,10 @@ return {
   "rebelot/heirline.nvim",
   dependencies = { "Zeioth/heirline-components.nvim" },
   lazy = false,
+  init = function()
+    vim.opt.cmdheight = 0
+    vim.opt.showtabline = 2
+  end,
   opts = function()
     local lib = require("heirline-components.all")
     return {
@@ -66,8 +70,6 @@ return {
         lib.component.file_info(),
         lib.component.git_diff(),
         lib.component.diagnostics(),
-        lib.component.fill(),
-        lib.component.cmd_info(),
         lib.component.fill(),
         lib.component.lsp(),
         lib.component.compiler_state(),

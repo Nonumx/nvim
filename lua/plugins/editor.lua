@@ -31,7 +31,6 @@ return {
           map("n", "[H", function() gs.nav_hunk("first") end, "First Hunk")
           map("n", "<leader>gb", function() gs.blame_line({ full = true }) end, "Blame Line")
           map("n", "<leader>gB", function() gs.blame() end, "Blame Buffer")
-          map("n", "<leader>gd", gs.diffthis, "Diff This")
         end,
       }
     end,
@@ -81,153 +80,219 @@ return {
     },
   },
 
-  -- 文件管理器
+  -- 快捷键提示
   {
-    "stevearc/oil.nvim",
-    ---@module 'oil'
-    ---@type oil.SetupOpts
-    opts = {},
-    lazy = false,
-    keys = {
-      { "-", "<cmd>Oil<cr>", { desc = "Open parent directory" } },
-      { "<leader>e", "<cmd>Oil<cr>", { desc = "Open Explorer" } },
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    opts = {
+      preset = "helix",
     },
   },
 
-  -- fzf-lua
+  -- QoL plugins
   {
-    "ibhagwan/fzf-lua",
-    ---@module "fzf-lua"
-    ---@type fzf-lua.Config|{}
-    ---@diagnostic disable: missing-fields
-    opts = {},
-    cmd = "FzfLua",
+    "folke/snacks.nvim",
+    lazy = false,
+    opts = {
+      explorer = { enabled = true },
+      indent = { enabled = true },
+      input = { enabled = true },
+      picker = { enabled = true },
+      notifier = { enabled = true },
+      scope = { enabled = true },
+      statuscolumn = { enabled = true },
+      words = { enabled = true },
+    },
     keys = {
-      { "<leader><space>", "<cmd>FzfLua files<cr>", desc = "Find Files" },
-      { "<leader>/", "<cmd>FzfLua live_grep<cr>", desc = "Grep" },
-      { "<leader>:", "<cmd>FzfLua command_history<cr>", desc = "Command History" },
+      -- Top Pickers & Explorer
+      {
+        "<leader><space>",
+        function()
+          Snacks.picker.smart()
+        end,
+        desc = "Smart Find Files",
+      },
+      {
+        "<leader>/",
+        function()
+          Snacks.picker.grep()
+        end,
+        desc = "Grep",
+      },
+      {
+        "<leader>n",
+        function()
+          Snacks.picker.notifications()
+        end,
+        desc = "Notification History",
+      },
+      {
+        "<leader>e",
+        function()
+          Snacks.explorer({ hidden = true, ignored = true })
+        end,
+        desc = "File Explorer",
+      },
+      -- find
       {
         "<leader>fc",
         function()
-          require("fzf-lua").files({ cwd = vim.fn.stdpath("config") })
+          Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
         end,
         desc = "Find Config File",
       },
-      { "<leader>sk", "<cmd>FzfLua keymaps<cr>", desc = "Key Maps" },
-      { "<leader>ss", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Goto Symbol" },
-    },
-  },
-
-  -- 终端管理
-  {
-    "akinsho/toggleterm.nvim",
-    sem_version = "^2",
-    cmd = { "ToggleTerm" },
-    keys = {
-      { "<leader>t", "<Cmd>ToggleTerm size=12 direction=horizontal<CR>", desc = "Terminal (Bottom)" },
+      -- search
+      {
+        "<leader>sd",
+        function()
+          Snacks.picker.diagnostics()
+        end,
+        desc = "Diagnostics",
+      },
+      {
+        "<leader>sD",
+        function()
+          Snacks.picker.diagnostics_buffer()
+        end,
+        desc = "Buffer Diagnostics",
+      },
+      {
+        "<leader>sh",
+        function()
+          Snacks.picker.help()
+        end,
+        desc = "Help Pages",
+      },
+      {
+        "<leader>sH",
+        function()
+          Snacks.picker.highlights()
+        end,
+        desc = "Highlights",
+      },
+      {
+        "<leader>sk",
+        function()
+          Snacks.picker.keymaps()
+        end,
+        desc = "Keymaps",
+      },
+      {
+        "<leader>sq",
+        function()
+          Snacks.picker.qflist()
+        end,
+        desc = "Quickfix List",
+      },
+      {
+        "<leader>uC",
+        function()
+          Snacks.picker.colorschemes()
+        end,
+        desc = "Colorschemes",
+      },
+      -- LSP
+      {
+        "gd",
+        function()
+          Snacks.picker.lsp_definitions()
+        end,
+        desc = "Goto Definition",
+      },
+      {
+        "gD",
+        function()
+          Snacks.picker.lsp_declarations()
+        end,
+        desc = "Goto Declaration",
+      },
+      {
+        "gr",
+        function()
+          Snacks.picker.lsp_references()
+        end,
+        nowait = true,
+        desc = "References",
+      },
+      {
+        "gI",
+        function()
+          Snacks.picker.lsp_implementations()
+        end,
+        desc = "Goto Implementation",
+      },
+      {
+        "gy",
+        function()
+          Snacks.picker.lsp_type_definitions()
+        end,
+        desc = "Goto Type Definition",
+      },
+      {
+        "gai",
+        function()
+          Snacks.picker.lsp_incoming_calls()
+        end,
+        desc = "Calls Incoming",
+      },
+      {
+        "gao",
+        function()
+          Snacks.picker.lsp_outgoing_calls()
+        end,
+        desc = "Calls Outgoing",
+      },
+      {
+        "<leader>ss",
+        function()
+          Snacks.picker.lsp_symbols()
+        end,
+        desc = "LSP Symbols",
+      },
+      {
+        "<leader>sS",
+        function()
+          Snacks.picker.lsp_workspace_symbols()
+        end,
+        desc = "LSP Workspace Symbols",
+      },
+      -- Other
+      {
+        "<leader>z",
+        function()
+          Snacks.zen()
+        end,
+        desc = "Toggle Zen Mode",
+      },
+      {
+        "<leader>Z",
+        function()
+          Snacks.zen.zoom()
+        end,
+        desc = "Toggle Zoom",
+      },
+      {
+        "<leader>bd",
+        function()
+          Snacks.bufdelete()
+        end,
+        desc = "Delete Buffer",
+      },
       {
         "<leader>gg",
         function()
-          if vim.fn.executable("lazygit") ~= 1 then
-            vim.notify("lazygit is not installed", vim.log.levels.WARN)
-            return
-          end
-          local git_root = vim.fs.root(0, ".git")
-          if not git_root then
-            vim.notify("Not in a git repository", vim.log.levels.WARN)
-            return
-          end
-          local Term = require("toggleterm.terminal").Terminal
-          local lazygit_term = Term:new({
-            cmd = "lazygit",
-            dir = git_root,
-            direction = "float",
-            hidden = true,
-          })
-          lazygit_term:toggle()
+          Snacks.lazygit()
         end,
         desc = "Lazygit",
       },
-    },
-    opts = {
-      size = 12,
-      direction = "horizontal",
-      shading_factor = 2,
-      highlights = {
-        Normal = { link = "Normal" },
-        NormalNC = { link = "NormalNC" },
-        NormalFloat = { link = "NormalFloat" },
-        FloatBorder = { link = "FloatBorder" },
-        StatusLine = { link = "StatusLine" },
-        StatusLineNC = { link = "StatusLineNC" },
-        WinBar = { link = "WinBar" },
-        WinBarNC = { link = "WinBarNC" },
+      {
+        "<leader>t",
+        function()
+          Snacks.terminal()
+        end,
+        desc = "Toggle Terminal",
       },
-      on_create = function()
-        vim.opt_local.foldcolumn = "0"
-        vim.opt_local.signcolumn = "no"
-      end,
     },
-  },
-
-  -- 快捷键提示
-  {
-    "nvim-mini/mini.clue",
-    event = "VeryLazy",
-    config = function()
-      local miniclue = require("mini.clue")
-      miniclue.setup({
-        triggers = {
-          -- Leader triggers
-          { mode = { "n", "x" }, keys = "<Leader>" },
-
-          -- `[` and `]` keys
-          { mode = "n", keys = "[" },
-          { mode = "n", keys = "]" },
-
-          -- Built-in completion
-          { mode = "i", keys = "<C-x>" },
-
-          -- `g` key
-          { mode = { "n", "x" }, keys = "g" },
-
-          -- Marks
-          { mode = { "n", "x" }, keys = "'" },
-          { mode = { "n", "x" }, keys = "`" },
-
-          -- Registers
-          { mode = { "n", "x" }, keys = '"' },
-          { mode = { "i", "c" }, keys = "<C-r>" },
-
-          -- Window commands
-          { mode = "n", keys = "<C-w>" },
-
-          -- `z` key
-          { mode = { "n", "x" }, keys = "z" },
-        },
-        clues = {
-          -- Enhance this by adding descriptions for <Leader> mapping groups
-          miniclue.gen_clues.square_brackets(),
-          miniclue.gen_clues.builtin_completion(),
-          miniclue.gen_clues.g(),
-          miniclue.gen_clues.marks(),
-          miniclue.gen_clues.registers(),
-          miniclue.gen_clues.windows(),
-          miniclue.gen_clues.z(),
-        },
-        window = {
-          delay = 300,
-          config = function(buf_id)
-            return {
-              height = math.min(10, math.max(1, vim.api.nvim_buf_line_count(buf_id))),
-            }
-          end,
-
-          scroll_down = "<C-d>",
-          scroll_up = "<C-u>",
-        },
-      })
-    end,
   },
 
   -- 会话管理

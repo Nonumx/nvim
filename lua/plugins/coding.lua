@@ -55,6 +55,7 @@ return {
     opts = {
       library = {
         { path = "mini.icons", words = { "MiniIcons" } },
+        { path = "snacks.nvim", words = { "Snacks" } },
       },
     },
   },
